@@ -12,7 +12,6 @@ city_dummy_dict = { 'New+Delhi':145 , 'Bangalore':377 , 'Kolkata':36 , 'Mumbai':
 
 city_dummy = city_dummy_dict[source_city] 
 
-
 URL_FIXED_11 = "http://www.savaari.com/select_cars.php?from_city="
 URL_FIXED_12 = "&from_city_dummy=145"
 URL_FIXED_13 = "&to_city="
