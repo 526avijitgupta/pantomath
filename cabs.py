@@ -8,7 +8,7 @@ source_city = str(raw_input("Enter the source city:")).replace(" ","+")
 destination_city = str(raw_input("Enter the destination city:")).replace(" ","+")
 journey_date = str(raw_input("Enter the date of the journey"))
 
-city_dummy_dict = { 'New+Delhi':145 , 'Bangalore':377 , 'Kolkata':36 , 'Mumbai':114 , 'Hyderabad':145 , 'Pondicherry':145 , 'Lucknow':145 , 'Dehradun':145 , 'Agra':145 , 'Pune':145 , 'Jaipur':145 , 'Guwahati':145 , 'Ahemdabad':145 , 'Gurgaon':145 , 'Mysore':145 , 'Goa':145 , 'Amritsar':145 , 'Khajuraho':145 , 'Chandigarh':145 }
+city_dummy_dict = { 'New+Delhi':145 , 'Bangalore':377 , 'Kolkata':36 , 'Mumbai':114 , 'Hyderabad':145 , 'Lucknow':145 , 'Dehradun':145 , 'Agra':145 , 'Jaipur':145 , 'Guwahati':145 , 'Ahemdabad':145 , 'Mysore':145 , 'Goa':145 , 'Amritsar':145 , 'Khajuraho':145 }
 
 city_dummy = str(city_dummy_dict[source_city])
 
