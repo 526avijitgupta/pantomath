@@ -32,10 +32,9 @@
 			<div class="col-sm-6 content-sub-container" id="flights-content">
 				<div class="content-head-wrap inline-form-marginleft">
 					<h2><strong>Search for hotels</strong></h2>
-					<small class="small" style="font-size:16px;">Over 100,000 hotels around the world</small>
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
-					<form role="form">
+					<!-- <form role="form">
 							<br>
 							<label class="checkbox-inline">
 								<input type="radio" name="radio-filter" id="flights-form-radio-1" value="one-way" checked>
@@ -45,7 +44,7 @@
 								<input type="radio" name="radio-filter" id="flights-form-radio-1" value="round-trip">
 								Weekend Getaways
 							</label>
-					</form>
+					</form> -->
 					<br>
 					<form role="form">
 						<div class="form-group col-sm-11">

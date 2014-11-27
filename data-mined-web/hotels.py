@@ -4,15 +4,26 @@
 
 from lxml import html
 import requests
+import csv
+from time import sleep
 
-city = str(raw_input("Enter the city!")).replace(" ","+").replace(",","%2C")
-checkin_day = str(raw_input("Enter the date of check-in"))
-checkin_year_month = str(raw_input("Enter the year-month of check-in"))
-checkout_day = str(raw_input("Enter the date of check-out"))
-checkout_year_month = str(raw_input("Enter the year-month of check-out"))
-no_of_rooms = str(raw_input("Enter the number of rooms"))
-no_of_adults = str(raw_input("Enter the number of adults"))
-no_of_children = str(raw_input("Enter the number of children"))
+city = "Bangalore%2C+Karnataka%2C+India"
+checkin_day = "29"
+checkin_year_month = "2014-11"
+checkout_day = "30"
+checkout_year_month = "2014-11"
+no_of_rooms = "1"
+no_of_adults = "1"
+no_of_children = "0"
+
+# city = str(raw_input("Enter the city!")).replace(" ","+").replace(",","%2C") = "Bangalore, Karnataka, India"
+# checkin_day = str(raw_input("Enter the date of check-in")) = "29"
+# checkin_year_month = str(raw_input("Enter the year-month of check-in")) = "2014-11"
+# checkout_day = str(raw_input("Enter the date of check-out")) = "30"
+# checkout_year_month = str(raw_input("Enter the year-month of check-out")) = "2014-11"
+# no_of_rooms = str(raw_input("Enter the number of rooms")) = "1"
+# no_of_adults = str(raw_input("Enter the number of adults")) = "1"
+# no_of_children = str(raw_input("Enter the number of children")) = "0"
 
 URL_FIXED_11 = "http://www.booking.com/searchresults.en-us.html?src=country&nflt=&ss_raw="
 URL_FIXED_12 = "&from_autocomplete=1&error_url=http%3A%2F%2Fwww.booking.com%2Fcountry%2Fin.en-us.html%3Faid%3D357026%3Blabel%3Dgog235jc-country-XX-in-XX-unspec-in-com-L%253Axu-O%253Aunk-B%253Aunk-N%253AXX-S%253Abo%3Bsid%3D42a44a15a5bc79382376195703433b12%3Bdcid%3D4%3Binac%3D0%26%3B&bb_asr=2&aid=357026&dcid=4&label=gog235jc-country-XX-in-XX-unspec-in-com-L%3Axu-O%3Aunk-B%3Aunk-N%3AXX-S%3Abo&sid=42a44a15a5bc79382376195703433b12&si=ai%2Cco%2Cci%2Cre%2Cdi&ss="
@@ -28,6 +39,8 @@ ultimate_url = URL_FIXED_11 + city + URL_FIXED_12 + city + URL_FIXED_13 + checki
 
 print ultimate_url
 
+sleep(2)
+
 page = requests.get(ultimate_url)
 tree = html.fromstring(page.text)
 
@@ -35,11 +48,20 @@ hotel_names = []
 hotel_ratings = []
 hotel_prices = []
 
+sleep(2)
+
 hotel_names = tree.xpath("//a[@class='hotel_name_link url refine_hotelname_4']/text()")
 hotel_ratings = tree.xpath("//span[@class='average']/text()")
-hotel_prices = tree.xpath("//b/text()")
- 
+
+sleep(2)
+
+hotel_prices = tree.xpath("//div[@class='b-group-recommendation__price']/text()")
+
 print hotel_names
 print hotel_ratings
 print hotel_prices
 
+# b = open('hotels.csv', 'w')
+# a = csv.writer(b)
+
+# a.writerows(data)

@@ -97,10 +97,9 @@
 			<div class="col-sm-6 content-sub-container" id="flights-content">
 				<div class="content-head-wrap inline-form-marginleft">
 					<h2><strong>Search  flights</strong></h2>
-					<small class="small" style="font-size:16px;">Fly Anywhere. Fly Everywhere</small>
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
-					<form role="form">
+					<!-- <form role="form">
 							<br>
 							<label class="checkbox-inline">
 								<input type="radio" name="radio-filter" id="flights-form-radio-1" value="one-way" checked>
@@ -118,7 +117,7 @@
 								<input type="radio" name="radio-filter" id="flights-form-radio-4" value="flight-hotel">
 								Flight + Hotel
 							</label>
-					</form>
+					</form> -->
 					<br>
 					<form class="inline-form" role="form">
 						<div class="form-group col-sm-5">
@@ -181,7 +180,7 @@
 							</select>
 							<small class="small">2-12 years</small>
 						</div>
-						<div class="form-group col-sm-2 inline-form-select">
+						<!-- <div class="form-group col-sm-2 inline-form-select">
 							<br>
 							<label for="infants">Infants</label>
 							<br>
@@ -191,9 +190,9 @@
 							</select>
 							<small class="small">Below 2 years</small>
 							<br><br>
-						</div>
+						</div> -->
 					</form>
-					<div class="col-md-11" style="border-bottom:1px dotted silver;">
+					<!-- <div class="col-md-11" style="border-bottom:1px dotted silver;">
 						<a id="more-options" href="#more-opt-form">
 							<strong>More Options: </strong>
 							Class of travel, Airline preference
@@ -218,7 +217,7 @@
 							<br>
 							<input type="text" class="form-control" id="preferred-airline">
 						</div>
-					</form>
+					</form> -->
 				</div>
 				<button class="btn btn-warning" id="search-flights-btn">Search Flights</button>
 			</div>
@@ -227,20 +226,8 @@
 				<div class="content-head-wrap"> <!--  inline-form-marginleft -->
 					<h2><strong>Search  results</strong></h2>
 				</div>
-				<div class="results-div-wrap">
-					<div class="">
-
-					</div>
-					<div class="">
-
-					</div>
-					<div class="">
-
-					</div>
-					<div class="">
-
-					</div>
-				</div>		
+				<!-- Results appended here -->
+				<div class="results-div-wrap"></div>		
 			</div>
 
 		</div>
