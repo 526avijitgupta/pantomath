@@ -4,8 +4,8 @@
 
 from lxml import html
 import requests
-import csv
-from time import sleep
+# import csv
+# from time import sleep
 
 city = "Bangalore%2C+Karnataka%2C+India"
 checkin_day = "29"
@@ -39,8 +39,6 @@ ultimate_url = URL_FIXED_11 + city + URL_FIXED_12 + city + URL_FIXED_13 + checki
 
 print ultimate_url
 
-sleep(2)
-
 page = requests.get(ultimate_url)
 tree = html.fromstring(page.text)
 
@@ -48,12 +46,8 @@ hotel_names = []
 hotel_ratings = []
 hotel_prices = []
 
-sleep(2)
-
 hotel_names = tree.xpath("//a[@class='hotel_name_link url refine_hotelname_4']/text()")
 hotel_ratings = tree.xpath("//span[@class='average']/text()")
-
-sleep(2)
 
 hotel_prices = tree.xpath("//div[@class='b-group-recommendation__price']/text()")
 
@@ -61,7 +55,16 @@ print hotel_names
 print hotel_ratings
 print hotel_prices
 
-# b = open('hotels.csv', 'w')
+# b = open('hotel.csv', 'wb')
 # a = csv.writer(b)
 
-# a.writerows(data)
+# for temp_hotel_name in hotel_names:
+# 	a.writerows([temp_hotel_name])
+
+file = open("hotels.txt","w")
+
+for temp_hotel_name in hotel_names:
+  file.write("%s" % temp_hotel_name)
+
+values = [list([item]) for item in lst]
+cursor.executemany(u'INSERT INTO `tb`(`Data`)(%s)', values)

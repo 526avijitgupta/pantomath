@@ -10,6 +10,10 @@
 	<form method="POST" action="query_result.php">
 		<!-- <input type="text" name="database" placeholder="Enter database name..."/>
 		<input type="text" name="query" placeholder="Enter query here..."/> -->
+    <select name="select_name">
+      <option val="1">1</option>
+      <option val="2">2</option>
+    </select>
 		<input type="submit" value="Go"/>
 	</form>
 <?php
@@ -17,6 +21,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   
   require_once("mysql_connect.php");  //Include file to connect to database
 
+  $select = $_POST['select_name'];
+  // echo $select;
   // $database = $_POST['database'];
   // $query = $_POST['query']; 
   /* The form method was POST so we use $_POST to access all name=something pairs
@@ -25,7 +31,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   //if database exist we execute the query
   if(mysqli_select_db($con,"pantomath")){ 
         
-        $result = mysqli_query($con,"call pro()");
+        // echo ("call inparam(" + (int)$select + ")");
+        // echo ("select" + "1");
+        if(!$empty) {
+          
+          $result = mysqli_query($con,"call inparam(" . $select . ")");
+        }
         
         if(!$result){
         	echo "<h3>Check your query again.</h3>";
