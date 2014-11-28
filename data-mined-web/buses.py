@@ -3,6 +3,7 @@
 from lxml import html
 import requests
 import json
+import time
 
 source_city = str(raw_input("Enter the source city:"))
 destination_city = str(raw_input("Enter the destination city:"))
@@ -27,12 +28,20 @@ print data
 
 price = []
 typebus = []
+departure_time = []
+arrival_time = []
 
 # x['btd']['1']['cv'][0]['bts']
 
 for i in range(0,5):
-	price += [data['btd'][str(i+1)]['cv'][0]['f']]
+	price += [data['btd'][str(i+1)]['cv'][0]['f'][0]]
 	typebus += [data['btd'][str(i+1)]['cv'][0]['bts']]
+	# arrival_time += [data['btd'][str(i+1)]['at']] 
+	departure_time += [time.strftime("%H:%M", time.gmtime(int(data['btd'][str(i+1)]['dt']) / 1000.0))]
+	# arrival_time += [time.strftime("%a %d %b %Y %H:%M:%S", time.gmtime(int(data['btd'][str(i+1)]['at']) / 1000.0))]
+	arrival_time += [time.strftime("%H:%M", time.gmtime(int(data['btd'][str(i+1)]['at']) / 1000.0))]
 
 print price
-print data
+print typebus
+print departure_time
+print arrival_time

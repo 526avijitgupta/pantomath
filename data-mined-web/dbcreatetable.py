@@ -12,12 +12,10 @@ cursor = db.cursor()
 cursor.execute("DROP TABLE IF EXISTS EMPLOYEE")
 
 # Create table as per requirement
-sql = """CREATE TABLE EMPLOYEE (
-         FIRST_NAME  CHAR(20) NOT NULL,
-         LAST_NAME  CHAR(20),
-         AGE INT,  
-         SEX CHAR(1),
-         INCOME FLOAT )"""
+sql = """CREATE TABLE HotelData (
+				 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+         hotel_name char(30),
+         hotel_location char(20) )"""
 
 cursor.execute(sql)
 

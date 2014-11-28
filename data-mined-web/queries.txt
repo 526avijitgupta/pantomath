@@ -1,0 +1,12 @@
+				 CREATE TABLE HotelData (
+				 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+         hotel_name char(30),
+         hotel_location char(20))
+
+         CREATE TABLE HotelPrice (
+				 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+         hotel_price double)
+
+         CREATE TABLE HotelRating (
+				 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+         hotel_rating float)
