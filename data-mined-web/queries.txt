@@ -67,3 +67,33 @@ flight_arr_time varchar(30),
 flight_dept_time varchar(30),
 flight_price int
 )
+
+CREATE TABLE CabPrices (
+cab_id int AUTO_INCREMENT PRIMARY KEY,
+cab_price int
+)
+
+CREATE TABLE CabTypes (
+cab_id int AUTO_INCREMENT,
+cab_type varchar(100),
+PRIMARY KEY (cab_id, cab_type)
+)
+
+CREATE TABLE CabNames (
+cab_id int AUTO_INCREMENT,
+cab_name varchar(100),
+PRIMARY KEY (cab_id, cab_name)
+)
+
+CREATE TABLE CabRoutes (
+cab_id int AUTO_INCREMENT,
+route_id int,
+PRIMARY KEY (cab_id, route_id)
+)
+
+
+CREATE TABLE CabCities (
+route_id int AUTO_INCREMENT PRIMARY KEY,
+cab_source varchar(30),
+cab_destination varchar(30)
+)

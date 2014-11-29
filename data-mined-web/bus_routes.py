@@ -4,10 +4,10 @@ db = MySQLdb.connect("localhost","root","im2gud","pantomath" )
 
 k = 0
 cursor = db.cursor()
-for i in range(0, 28):
-  k = i + 1
-  # if(i%3 == 0):
-  #   k += 1
+for i in range(0, 90):
+
+  if(i%3 == 0):
+    k += 1
   # # source_city = str(raw_input())
   # destination_city = str(raw_input())
 
@@ -15,7 +15,7 @@ for i in range(0, 28):
   # cursor.execute("INSERT INTO BusCities(bus_source, bus_destination) VALUES (%s, %s)", (destination_city, source_city))
   # cursor.execute("INSERT INTO FlightRoutes(route_id) VALUES (%s)", (int(k)))
   
-  cursor.execute("update BusTimes set bus_price = (%s) where bus_id = (%s)", (int(k)))
+  cursor.execute("INSERT INTO CabRoutes(route_id) VALUES (%s)", (int(k)))
 
 
 
