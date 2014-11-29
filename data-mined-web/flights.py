@@ -1,40 +1,71 @@
-# http://www.cleartrip.com/flights/calendar/calendarstub.json?from=DEL&to=BOM&start_date=20141101&end_date=20141130
+# http://flight.yatra.com/air-service/dom2/airMonthView?&OriginLocationCode=DEL&DestinationLocationCode=BOM&travelClass=Economy&flight_depart_date=2014%2F11%2F26
 
 from lxml import html
 import requests
 import json
+import MySQLdb
 
-source_city = str(raw_input("Enter the source city:"))
-destination_city = str(raw_input("Enter the destination city:"))
-depart_date = str(raw_input("Enter the date of the journey")).replace("-","")
+# source_city = str(raw_input("Enter the source city:"))
+# destination_city = str(raw_input("Enter the destination city:"))
+depart_date = "2014,11,30".replace(",", "%2F")
+travel_class = "Economy"
 
-city_dummy_dict = { 'Delhi':'DEL' , 'Bangalore':'BLR' , 'Chennai':'MAA' ,'Kolkata':36 , 'Mumbai':114 , 'Hyderabad':145 , 'Lucknow':145 , 'Dehradun':145 , 'Agra':145 , 'Jaipur':145 , 'Guwahati':145 , 'Ahemdabad':145 , 'Mysore':145 , 'Goa':145 , 'Amritsar':145 , 'Khajuraho':145 }
+city_list = ["Delhi", "Mumbai", "Chennai", "Bangalore", "Goa"]
+city_dict = {"Delhi":"DEL", "Mumbai":"BOM", "Chennai":"MAA", "Bangalore":"BLR", "Goa":"GOI"}
 
-depart_dummy = str(city_dummy_dict[source_city])
+for j in range(0, 5):
+  for k in range(0, 5):
+    if (j != k):
+      source_city = city_list[j]
+      destination_city = city_list[k]
 
-arrival_dummy = str(city_dummy_dict[destination_city])
+      depart_dummy = str(city_dict[source_city])
 
-URL_FIXED_11 = "http://www.cleartrip.com/flights/calendar/calendarstub.json?from="
-URL_FIXED_12 = "&to="
-URL_FIXED_13 = "&start_date="
-URL_FIXED_14 = "&end_date=" # 17-11-2014
+      arrival_dummy = str(city_dict[destination_city])
 
-ultimate_url = URL_FIXED_11 + depart_dummy + URL_FIXED_12 + arrival_dummy + URL_FIXED_13 + depart_date + URL_FIXED_14 + depart_date
+      URL_FIXED_11 = "http://flight.yatra.com/air-service/dom2/airMonthView?&OriginLocationCode="
+      URL_FIXED_12 = "&DestinationLocationCode="
+      URL_FIXED_13 = "&travelClass="
+      URL_FIXED_14 = "&flight_depart_date=" # 2014,11,26
 
-print ultimate_url
-#pdb.set_trace()
-page = requests.get(ultimate_url)
-print page
-data = json.loads(page.text)
-# tree = html.fromstring(page.text)
+      ultimate_url = URL_FIXED_11 + depart_dummy + URL_FIXED_12 + arrival_dummy + URL_FIXED_13 + travel_class + URL_FIXED_14 + depart_date
 
-# data = json.loads(tree)
+      print ultimate_url
 
-print data
+      page = requests.get(ultimate_url)
 
-price = []
+      data = json.loads(page.text)  
 
-for i in range(len(data['calendar_json'][depart_date])):
-	price += [data['calendar_json'][depart_date][i]['pr']]
+      price = []
+      airline_name = []
+      departure_time = []
+      arrival_time = []
 
-print price
+      for i in range(0,3):
+        price += [data[0]["mnArr"][i]["cf"][0]["tf"]]
+        # airline_name += [data[0]["mnArr"][i]["cf"][0]["yan"]]
+        departure_time += [data[0]["mnArr"][i]["cf"][0]["dt"]]
+        arrival_time += [data[0]["mnArr"][i]["cf"][0]["at"]]
+        
+      print price
+      # print airline_name
+      print departure_time
+      print arrival_time
+
+
+      db = MySQLdb.connect("localhost","root","im2gud","pantomath")
+
+      # prepare a cursor object using cursor() method
+      cursor = db.cursor()
+
+      for i in range(0, 3):  
+        print "inserting"
+        try:
+          cursor.execute("INSERT INTO FlightData(flight_arr_time, flight_dept_time, flight_price) VALUES (%s, %s, %s)", (arrival_time[i], departure_time[i], price[i]))
+      # Commit your changes in the database
+          db.commit()
+        except:
+          db.rollback()
+
+db.close()
+print 'done'

@@ -1,12 +1,69 @@
-				 CREATE TABLE HotelData (
-				 hotel_id int AUTO_INCREMENT PRIMARY KEY,
-         hotel_name char(30),
-         hotel_location char(20))
+CREATE TABLE HotelNames (
+hotel_id int AUTO_INCREMENT PRIMARY KEY,
+hotel_name varchar(50),
+location_id int,
+)
 
-         CREATE TABLE HotelPrice (
-				 hotel_id int AUTO_INCREMENT PRIMARY KEY,
-         hotel_price double)
+CREATE TABLE HotelPrice (
+	 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+hotel_price double)
 
-         CREATE TABLE HotelRating (
-				 hotel_id int AUTO_INCREMENT PRIMARY KEY,
-         hotel_rating float)
+CREATE TABLE HotelRating (
+	 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+hotel_rating float)
+
+CREATE TABLE BusTypes (
+bus_id int AUTO_INCREMENT,
+bus_type varchar(100),
+PRIMARY KEY (bus_id, bus_type)
+)
+
+CREATE TABLE BusRoutes (
+bus_id int AUTO_INCREMENT,
+route_id int,
+PRIMARY KEY (bus_id, route_id)
+)
+
+CREATE TABLE BusCities (
+route_id int AUTO_INCREMENT PRIMARY KEY,
+bus_source varchar(30),
+bus_destination varchar(30)
+)
+
+CREATE TABLE BusData (
+bus_id int AUTO_INCREMENT PRIMARY KEY,
+bus_arr_time varchar(30),
+bus_dept_time varchar(30),
+bus_price int
+)
+
+CREATE TABLE FlightNames (
+flight_id int AUTO_INCREMENT PRIMARY KEY,
+flight_name varchar(30)
+)
+
+CREATE TABLE FlighRoutes (
+flight_id int AUTO_INCREMENT,
+route_id int,
+PRIMARY KEY (flight_id, route_id)
+)
+
+CREATE TABLE FlightCities (
+route_id int AUTO_INCREMENT PRIMARY KEY,
+flight_source varchar(30),
+flight_destination varchar(30)
+)
+
+CREATE TABLE FlightTimes (
+route_id int AUTO_INCREMENT PRIMARY KEY,
+flight_source varchar(30),
+flight_destination varchar(30)
+)
+
+
+CREATE TABLE FlightData (
+flight_id int AUTO_INCREMENT PRIMARY KEY,
+flight_arr_time varchar(30),
+flight_dept_time varchar(30),
+flight_price int
+)

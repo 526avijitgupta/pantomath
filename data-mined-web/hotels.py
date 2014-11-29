@@ -24,9 +24,9 @@ city_list = ["Mumbai","Bangalore","Chennai","Kolkata","Lucknow","Delhi","Goa"]
 # no_of_rooms = str(raw_input("Enter the number of rooms")) = "1"
 # no_of_adults = str(raw_input("Enter the number of adults")) = "1"
 # no_of_children = str(raw_input("Enter the number of children")) = "0"
-
+k = 0
 for city in city_list:
-
+	k += 1
 	URL_FIXED_11 = "http://www.booking.com/searchresults.en-us.html?src=country&nflt=&ss_raw="
 	URL_FIXED_12 = "&from_autocomplete=1&error_url=http%3A%2F%2Fwww.booking.com%2Fcountry%2Fin.en-us.html%3Faid%3D357026%3Blabel%3Dgog235jc-country-XX-in-XX-unspec-in-com-L%253Axu-O%253Aunk-B%253Aunk-N%253AXX-S%253Abo%3Bsid%3D42a44a15a5bc79382376195703433b12%3Bdcid%3D4%3Binac%3D0%26%3B&bb_asr=2&aid=357026&dcid=4&label=gog235jc-country-XX-in-XX-unspec-in-com-L%3Axu-O%3Aunk-B%3Aunk-N%3AXX-S%3Abo&sid=42a44a15a5bc79382376195703433b12&si=ai%2Cco%2Cci%2Cre%2Cdi&ss="
 	# URL_FIXED_13 = "&checkin_monthday="
@@ -45,16 +45,16 @@ for city in city_list:
 	page = requests.get(ultimate_url)
 	tree = html.fromstring(page.text)
 
-	# hotel_names = []
-	hotel_ratings = []
+	hotel_names = []
+	# hotel_ratings = []
 
-	# hotel_names = tree.xpath("//a[@class='hotel_name_link url refine_hotelname_4']/text()")
-	hotel_ratings = tree.xpath("//span[@class='average']/text()")
+	hotel_names = tree.xpath("//a[@class='hotel_name_link url refine_hotelname_4']/text()")
+	# hotel_ratings = tree.xpath("//span[@class='average']/text()")
 
 	# hotel_prices = tree.xpath("//div[@class='b-group-recommendation__price']/text()")
 
-	# print hotel_names
-	print hotel_ratings
+	print hotel_names
+	# print hotel_ratings
 
 	# b = open('hotel.csv', 'wb')
 	# a = csv.writer(b)
@@ -96,15 +96,15 @@ for city in city_list:
 	# for age in Age:
 	# 	age = int(age)
 
-	for i in range(len(hotel_ratings)):
-		print "inserting %d of %d" % (i,len(hotel_ratings))
+	for i in range(len(hotel_names)):
+		print "inserting %d of %d" % (i,len(hotel_names))
 		# print (Ename['%d'],Age['%d']) % (i,i)
 		# print Ename[i],Age[i]
 		# index = Ename.index(name)
 		# sql = "INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, AGE, SEX, INCOME) VALUES (%s, 'Mohan', 20, 'M', 2000)", (name,)
 		try:
 		  # Execute the SQL command
-		  cursor.execute("INSERT INTO HotelRating(hotel_rating) VALUES (%s)", (float(hotel_ratings[i])))
+		  cursor.execute("INSERT INTO HotelNames(hotel_name, location_id) VALUES (%s, %s)", (hotel_names[i].replace("\n",""), int(k)))
 		  # Commit your changes in the database
 		  db.commit()
 		except:
