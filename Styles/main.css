@@ -4,7 +4,9 @@ body { background-color: rgb(245,245,245); }
 
 .content-container { margin:20px 0px -40px 0px; }
 
-.content-sub-container { background-color: white; color: black; margin-top: -13px; min-height: 550px; border:1px solid silver; border-top:none; border-bottom:none;}
+.content-sub-container { background-color: white; color: black; margin-top: 0; min-height: 500px; border:1px solid silver; border-top:none; border-bottom:none;}
+
+.content-sub-container > div { margin-top:40px; }
 
 .fwd-right { float: right; font-size: 18px; margin-top:5px; }
 
@@ -38,7 +40,7 @@ span[class^="ion-social"] { font-size:22px; }
 
 .inline-form-marginleft { margin-left:60px; }
 
-#from-to { position: absolute; top: 170px; left: 330px; font-size: 18px; }
+#from-to { position: absolute; top: 108px; left: 330px; font-size: 18px; }
 
 #depart-on { width: 200px; }
 
@@ -48,7 +50,7 @@ span[class^="ion-social"] { font-size:22px; }
 
 .form-select-inline { width: 79px; }
 
-#search-flights-btn { float: right; margin:30px 30px 30px 0px; }
+#search-flights-btn { float: right; margin:40px 30px 30px 0; }
 
 #flights-content { font-size: 13px; z-index: 100; }
 

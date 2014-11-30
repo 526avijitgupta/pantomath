@@ -1,5 +1,5 @@
 $(function (){
-	url_fname = window.location.href.split('CT---Frontend/');
+	url_fname = window.location.href.split('pantomath/');
 	fname_active = url_fname[1].split('.php').join("");
 	if(fname_active == []) {
 		fname_active = '#index';

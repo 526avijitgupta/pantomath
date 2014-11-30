@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Book Cheap Air Tickets, Domestic Flight Ticket Booking at Lowest Airfare on Cleartrip.</title>
+	<title>Pantomath.com - Cab Booking</title>
 	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" href="Styles/main.css">
 	<link rel="stylesheet" href="Styles/ionicons.css">
@@ -31,20 +31,20 @@
 				require_once('left_sidenav.php');
 			?>
 
-			<div class="col-sm-6 content-sub-container" id="flights-content">
+			<div class="col-sm-7 content-sub-container" id="flights-content">
 				<div class="content-head-wrap inline-form-marginleft">
-					<h2><strong>Search  cabs</strong></h2>
+					<h2><strong>Search cabs</strong></h2>
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
 					<br>
 					<form class="inline-form" role="form">
-						<div class="form-group col-sm-4">
+						<div class="form-group col-sm-5">
 							<label for="from">From</label>
-							<input type="text" class="form-control" id="from" placeholder="Any worldwide city or airport">
+							<input type="text" class="form-control" id="from" placeholder="Select a city">
 						</div>
-						<div class="form-group col-sm-4 inline-form-marginleft">
+						<div class="form-group col-sm-5 inline-form-marginleft">
 							<label for="to">To</label>
-							<input type="text" class="form-control" id="to" placeholder="Any worldwide city or airport">
+							<input type="text" class="form-control" id="to" placeholder="Select a city">
 						</div>
 					</form>
 					<form role="form">
@@ -60,7 +60,7 @@
 						<br>
 					</div>
 				</div>
-				<button class="btn btn-warning" id="search-flights-btn">Search Buses</button>
+				<button class="btn btn-warning" id="search-flights-btn">Search Cabs</button>
 			</div>
 		</div>
 
