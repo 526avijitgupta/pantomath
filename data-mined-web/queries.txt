@@ -5,11 +5,11 @@ location_id int,
 )
 
 CREATE TABLE HotelPrice (
-	 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+ hotel_id int AUTO_INCREMENT PRIMARY KEY,
 hotel_price double)
 
 CREATE TABLE HotelRating (
-	 hotel_id int AUTO_INCREMENT PRIMARY KEY,
+ hotel_id int AUTO_INCREMENT PRIMARY KEY,
 hotel_rating float)
 
 CREATE TABLE BusTypes (
@@ -97,3 +97,93 @@ route_id int AUTO_INCREMENT PRIMARY KEY,
 cab_source varchar(30),
 cab_destination varchar(30)
 )
+
+
+CREATE TABLE BookedHotels (
+bh_id int AUTO_INCREMENT PRIMARY KEY,
+check_in varchar(30),
+check_out varchar(30),
+rooms int,
+adults int,
+children int
+)
+
+
+CREATE TABLE BookedFlights (
+bf_id int AUTO_INCREMENT PRIMARY KEY,
+source varchar(30),
+destination varchar(30),
+arrival_time varchar(30),
+departure_time varchar(30),
+price int
+)
+
+
+CREATE TABLE BookedBuses (
+bb_id int AUTO_INCREMENT PRIMARY KEY,
+source varchar(30),
+destination varchar(30),
+arrival_time varchar(30),
+departure_time varchar(30),
+price int
+)
+
+
+CREATE TABLE BookedCabs (
+bc_id int AUTO_INCREMENT PRIMARY KEY,
+name varchar(30),
+type varchar(30),
+source varchar(30),
+destination varchar(30),
+date varchar(30),
+price int
+)
+
+
+CREATE TABLE BookedCabs (
+bc_id int AUTO_INCREMENT PRIMARY KEY,
+name varchar(30),
+type varchar(30),
+source varchar(30),
+destination varchar(30),
+date varchar(30),
+price int
+)
+
+
+CREATE TABLE BookedHotelIDs (
+bh_id int AUTO_INCREMENT PRIMARY KEY,
+hotel_id int
+)
+
+CREATE TABLE BookedFlightIDs (
+bf_id int AUTO_INCREMENT PRIMARY KEY,
+flight_id int
+)
+
+CREATE TABLE BookedBusIDs (
+bb_id int AUTO_INCREMENT PRIMARY KEY,
+bus_id int
+)
+
+
+CREATE TABLE BookedCabIDs (
+bc_id int AUTO_INCREMENT PRIMARY KEY,
+cab_id int
+)
+
+Search Flights:
+
+select fn.flight_name, fd.flight_arr_time, fd.flight_dept_time, fd.flight_price from FlightData as fd, FlightNames as fn where fn.flight_id = fd.flight_id and fn.flight_id in (select fr.flight_id from FlightRoutes as fr, FlightCities as fc where fc.route_id = fr.route_id and fc.route_id in (Select route_id from FlightCities where flight_source = 'Delhi' and flight_destination = 'Mumbai'))
+
+Search Buses:
+
+select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = 'Lucknow' and bus_destination = 'Kanpur'));
+
+Search Cabs:
+
+select cn.cab_name , ct.cab_type, cp.cab_price from CabNames as cn, CabTypes as ct, CabPrices as cp where cp.cab_id = ct.cab_id and ct.cab_id = cn.cab_id and ct.cab_id in (Select cr.cab_id from CabRoutes as cr, CabCities as cc, CabTypes as ct where cr.route_id = cc.route_id and cc.route_id in (select route_id from CabCities where cab_source = 'Mumbai' and cab_destination = 'Bangalore'
+
+Search Hotels:
+
+select hr.hotel_rating, hp.hotel_price, hd.hotel_name from HotelRatings as hr, HotelPrices as hp, HotelData as hd where hr.hotel_id = hp.hotel_id and hd.hotel_id = hp.hotel_id and hd.location_id in (select hc.location_id from HotelCities as hc, HotelData as hd where hc.location_id = hd.location_id and hd.location_id in(select location_id from HotelCities where location = 'Delhi'));

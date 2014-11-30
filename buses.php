@@ -2,14 +2,12 @@
 <html>
 <head>
 	<title>Pantomath.com - Bus Booking</title>
-	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="Styles/bootstrap.min.css">
 	<link rel="stylesheet" href="Styles/main.css">
 	<link rel="stylesheet" href="Styles/ionicons.css">
 	<link rel="stylesheet" href="Styles/datepicker.css">
-	<link rel="stylesheet" href="datePicker/jqueryCalendar.css">
-	<script type="text/javascript" src="bootstrap/jquery.js"></script>
+	<script type="text/javascript" src="Scripts/jquery.js"></script>
 	<script type="text/javascript" src="Scripts/jquery-ui.js"></script>
-	<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="Scripts/link_active_assign.js"></script>
 	<script type="text/javascript" src="Scripts/connect_icon_hover.js"></script>
 	<script type="text/javascript" src="Scripts/bootstrap-datepicker.js"></script>
@@ -59,17 +57,17 @@
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
 					<br>
-					<form class="inline-form" role="form">
+					<form class="inline-form" role="form" action="buses.php" method="post">
 						<div class="form-group col-sm-5">
 							<label for="from">From</label>
-							<input type="text" class="form-control" id="from" placeholder="Select a city">
+							<input type="text" name="source" class="form-control" id="from" placeholder="Select a city">
 						</div>
 						<div class="form-group col-sm-5 inline-form-marginleft">
 							<label for="to">To</label>
-							<input type="text" class="form-control" id="to" placeholder="Select a city">
+							<input type="text" name="destination" class="form-control" id="to" placeholder="Select a city">
 						</div>
-					</form>
-					<form role="form">
+					<!-- </form> -->
+					<!-- <form role="form"> -->
 						<div class="form-group col-sm-4">
 							<br>
 							<label for="depart on">Depart on</label>
@@ -77,13 +75,13 @@
 							<span class="ion-calendar pointer" id="date-picker"></span>
 							<br>
 						</div>
+						</div>
+							<button type="submit" formaction="buses.php" class="btn btn-warning" id="search-flights-btn">Search Buses</button>
+						</div>
 					</form>
 					<div class="col-md-11" style="border-bottom:1px dotted silver;">
 						<br>
 					</div>
-				</div>
-				<button class="btn btn-warning" id="search-flights-btn">Search Buses</button>
-			</div>
 		</div>
 
 		<br><br>
@@ -95,3 +93,46 @@
 	</div>
 </body>
 </html>
+
+
+<?php
+	// $source_city = "NULL";
+	// $destination_city = "NULL";
+
+ 	if($_SERVER['REQUEST_METHOD']=='POST') {
+
+ 		// print_r($_POST);
+		require_once('connection.php');
+		// $children = $_POST['children'];
+		// echo $children;
+		$source_city = $_POST['source'];
+		$destination_city = $_POST['destination'];
+
+		// $query = "Select * from FlightCities where flight_source = " . '"' . $source_city . '"' . " and flight_destination =  " . '"' . $destination_city . '"' ;
+		// $query = "Select route_id from FlightCities where flight_source = '$source_city' and flight_destination = '$destination_city'";
+		$query = "select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = '$source_city' and bus_destination = '$destination_city'));";
+		// echo $query;
+		$result = mysqli_query($con, $query);
+
+		if( !$result ) {
+
+			echo "The query returned nothing!";
+		} else {
+			// $row = mysqli_fetch_array($result,MYSQL_NUM);
+			// echo $row[1];
+
+			if(mysqli_num_rows($result)>0){  //if a table is returned, display the table 
+      	print "<table border=1>";
+          for($i=0;$i<mysqli_num_rows($result);$i++){
+
+            $row = mysqli_fetch_array($result,MYSQL_NUM);
+            print "<tr>";
+            for($j=0;$j<count($row);$j++)
+	            print "<td>$row[$j]</td>";
+	          print "</tr>";
+          }
+        print "</table>"; 
+      }
+		}
+	}
+?>

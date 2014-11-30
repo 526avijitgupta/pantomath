@@ -1,7 +1,7 @@
 $(function(){
 
-	$('#search-flights-btn').on('click',function (event){
-		event.preventDefault();
+	// $('#search-flights-btn').on('click',function (event){
+		// event.preventDefault();
 
 		var from_val = $('#from').val();
 		var to_val = $('#to').val();
@@ -32,11 +32,6 @@ $(function(){
 			alert(alert_message);
 		}
 
-		else {
-			$('#flights-content').hide();
-			$('#search-results-container').show();
-		}
-
-	});
+	// });
 
 });
