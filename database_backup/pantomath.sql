@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2014 at 03:27 AM
+-- Generation Time: Dec 02, 2014 at 02:44 AM
 -- Server version: 5.5.40
 -- PHP Version: 5.3.10-1ubuntu3.15
 
@@ -45,6 +45,120 @@ select * from try;
 end$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedBuses`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedBuses` (
+  `bb_id` int(11) NOT NULL AUTO_INCREMENT,
+  `source` varchar(30) DEFAULT NULL,
+  `destination` varchar(30) DEFAULT NULL,
+  `arrival_time` varchar(30) DEFAULT NULL,
+  `departure_time` varchar(30) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bb_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedBusIDs`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedBusIDs` (
+  `bb_id` int(11) NOT NULL AUTO_INCREMENT,
+  `bus_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bb_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedCabIDs`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedCabIDs` (
+  `bc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cab_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedCabs`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedCabs` (
+  `bc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  `type` varchar(30) DEFAULT NULL,
+  `source` varchar(30) DEFAULT NULL,
+  `destination` varchar(30) DEFAULT NULL,
+  `date` varchar(30) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedFlightIDs`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedFlightIDs` (
+  `bf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `flight_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bf_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedFlights`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedFlights` (
+  `bf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `source` varchar(30) DEFAULT NULL,
+  `destination` varchar(30) DEFAULT NULL,
+  `arrival_time` varchar(30) DEFAULT NULL,
+  `departure_time` varchar(30) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bf_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedHotelIDs`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedHotelIDs` (
+  `bh_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hotel_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bh_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `BookedHotels`
+--
+
+CREATE TABLE IF NOT EXISTS `BookedHotels` (
+  `bh_id` int(11) NOT NULL AUTO_INCREMENT,
+  `check_in` varchar(30) DEFAULT NULL,
+  `check_out` varchar(30) DEFAULT NULL,
+  `rooms` int(11) DEFAULT NULL,
+  `adults` int(11) DEFAULT NULL,
+  `children` int(11) DEFAULT NULL,
+  `location` varchar(40) NOT NULL,
+  PRIMARY KEY (`bh_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -764,12 +878,12 @@ INSERT INTO `FlightData` (`flight_id`, `flight_arr_time`, `flight_dept_time`, `f
 (3, '07:45', '05:30', 6267),
 (4, '14:05', '12:10', 8890),
 (5, '14:05', '12:10', 6057),
-(6, '14:05', '12:10', 6057),
+(6, '14:05', '12:10', 6157),
 (7, '12:30', '09:45', 6500),
 (8, '12:15', '09:30', 6500),
 (9, '19:15', '16:35', 6500),
 (10, '16:10', '14:00', 9574),
-(11, '18:00', '15:30', 7842),
+(11, '18:00', '15:30', 8142),
 (12, '18:00', '15:30', 7842),
 (13, '18:40', '16:30', 6491),
 (14, '08:25', '06:20', 6491),
@@ -1004,10 +1118,10 @@ INSERT INTO `HotelCities` (`location_id`, `location`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `HotelNames`
+-- Table structure for table `HotelData`
 --
 
-CREATE TABLE IF NOT EXISTS `HotelNames` (
+CREATE TABLE IF NOT EXISTS `HotelData` (
   `hotel_id` int(11) NOT NULL AUTO_INCREMENT,
   `hotel_name` varchar(50) DEFAULT NULL,
   `location_id` int(11) DEFAULT NULL,
@@ -1015,10 +1129,10 @@ CREATE TABLE IF NOT EXISTS `HotelNames` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
 
 --
--- Dumping data for table `HotelNames`
+-- Dumping data for table `HotelData`
 --
 
-INSERT INTO `HotelNames` (`hotel_id`, `hotel_name`, `location_id`) VALUES
+INSERT INTO `HotelData` (`hotel_id`, `hotel_name`, `location_id`) VALUES
 (1, 'Palladium Hotel, Mumbai', 1),
 (2, 'Trident Nariman Point', 1),
 (3, 'Best Western Hotel Sahil Mumbai', 1),
@@ -1060,91 +1174,7 @@ INSERT INTO `HotelNames` (`hotel_id`, `hotel_name`, `location_id`) VALUES
 (39, 'Kenilworth Resort & SPA,Goa', 7),
 (40, 'The Treehouse Blue', 7),
 (41, 'Ramada Caravela Beach Resort', 7),
-(42, 'The Fern Beira Mar Resort', 7),
-(43, 'Palladium Hotel, Mumbai', 1),
-(44, 'Trident Nariman Point', 1),
-(45, 'Best Western Hotel Sahil Mumbai', 1),
-(46, 'Four Seasons Hotel Mumbai', 1),
-(47, 'The Taj Mahal Palace', 1),
-(48, 'The Oberoi Mumbai', 1),
-(49, 'The Ritz - Carlton, Bangalore', 2),
-(50, 'Oakwood Premier Prestige Bangalore', 2),
-(51, 'Citadines Richmond Bangalore', 2),
-(52, 'The Oberoi Bangalore', 2),
-(53, 'My Fortune Bengaluru', 2),
-(54, 'The Gateway Hotel Residency Road', 2),
-(55, 'Hyatt Regency Chennai', 3),
-(56, 'The Residency Towers', 3),
-(57, 'The Accord Metropolitan', 3),
-(58, 'The Raintree Hotel, Anna Salai', 3),
-(59, 'The Residency, Chennai', 3),
-(60, 'Savera Hotel', 3),
-(61, 'The Oberoi Grand Kolkata', 4),
-(62, 'New Kenilworth Hotel', 4),
-(63, 'Hotel Casa Fortuna', 4),
-(64, 'Taj Bengal', 4),
-(65, 'The Peerless Inn', 4),
-(66, 'Sapphire Suites', 4),
-(67, 'Golden Tulip Lucknow', 5),
-(68, 'Vivanta by Taj Gomti Nagar', 5),
-(69, 'Clarks Avadh', 5),
-(70, 'Best Western Plus Levana', 5),
-(71, 'York Inn', 5),
-(72, 'Hotel Santa Inn', 5),
-(73, 'Shangri-La''s - Eros Hotel, New Delhi', 6),
-(74, 'The LaLiT New Delhi', 6),
-(75, 'Hotel Cabana @ Pahar Ganj', 6),
-(76, 'The Imperial, New Delhi', 6),
-(77, 'Radisson Blu Marina Hotel Connaught Place', 6),
-(78, 'Hotel Palm D''Or', 6),
-(79, 'Beleza By The Beach', 7),
-(80, 'Alila Diwa Goa', 7),
-(81, 'Kenilworth Resort & SPA,Goa', 7),
-(82, 'The Treehouse Blue', 7),
-(83, 'Ramada Caravela Beach Resort', 7),
-(84, 'The Fern Beira Mar Resort', 7),
-(85, 'Palladium Hotel, Mumbai', 1),
-(86, 'Trident Nariman Point', 1),
-(87, 'Best Western Hotel Sahil Mumbai', 1),
-(88, 'Four Seasons Hotel Mumbai', 1),
-(89, 'The Taj Mahal Palace', 1),
-(90, 'The Oberoi Mumbai', 1),
-(91, 'The Ritz - Carlton, Bangalore', 2),
-(92, 'Oakwood Premier Prestige Bangalore', 2),
-(93, 'Citadines Richmond Bangalore', 2),
-(94, 'The Oberoi Bangalore', 2),
-(95, 'My Fortune Bengaluru', 2),
-(96, 'The Gateway Hotel Residency Road', 2),
-(97, 'Hyatt Regency Chennai', 3),
-(98, 'The Residency Towers', 3),
-(99, 'The Accord Metropolitan', 3),
-(100, 'The Raintree Hotel, Anna Salai', 3),
-(101, 'The Residency, Chennai', 3),
-(102, 'Savera Hotel', 3),
-(103, 'The Oberoi Grand Kolkata', 4),
-(104, 'New Kenilworth Hotel', 4),
-(105, 'Hotel Casa Fortuna', 4),
-(106, 'Taj Bengal', 4),
-(107, 'The Peerless Inn', 4),
-(108, 'Sapphire Suites', 4),
-(109, 'Golden Tulip Lucknow', 5),
-(110, 'Vivanta by Taj Gomti Nagar', 5),
-(111, 'Clarks Avadh', 5),
-(112, 'Best Western Plus Levana', 5),
-(113, 'York Inn', 5),
-(114, 'Hotel Santa Inn', 5),
-(115, 'Shangri-La''s - Eros Hotel, New Delhi', 6),
-(116, 'The LaLiT New Delhi', 6),
-(117, 'Hotel Cabana @ Pahar Ganj', 6),
-(118, 'The Imperial, New Delhi', 6),
-(119, 'Radisson Blu Marina Hotel Connaught Place', 6),
-(120, 'Hotel Palm D''Or', 6),
-(121, 'Beleza By The Beach', 7),
-(122, 'Alila Diwa Goa', 7),
-(123, 'Kenilworth Resort & SPA,Goa', 7),
-(124, 'The Treehouse Blue', 7),
-(125, 'Ramada Caravela Beach Resort', 7),
-(126, 'The Fern Beira Mar Resort', 7);
+(42, 'The Fern Beira Mar Resort', 7);
 
 -- --------------------------------------------------------
 
