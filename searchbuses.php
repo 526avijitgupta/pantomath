@@ -63,10 +63,15 @@
 					 	if($_SERVER['REQUEST_METHOD']=='POST') {
 
 							require_once('connection.php');
+							session_start();
 							$source_city = $_POST['source'];
 							$destination_city = $_POST['destination'];
+							$date = $_POST['date'];
+							$_SESSION['source'] = $source_city;
+							$_SESSION['destination'] = $destination_city;
+							$_SESSION['date'] = $date;
 
-							$query = "select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = '$source_city' and bus_destination = '$destination_city'));";
+							$query = "select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time, bd.bus_price from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = '$source_city' and bus_destination = '$destination_city'));";
 							$result = mysqli_query($con, $query);
 
 							if( !$result ) {
@@ -76,14 +81,19 @@
 
 								if(mysqli_num_rows($result)>0){  //if a table is returned, display the table 
 					      	print "<table border=1>";
+					      	print "<form action='bus_booking.php' method='post'>";
 					          for($i=0;$i<mysqli_num_rows($result);$i++){
 
 					            $row = mysqli_fetch_array($result,MYSQL_NUM);
+					            $_SESSION['result'][$i] = $row;
 					            print "<tr>";
 					            for($j=0;$j<count($row);$j++)
-						            print "<td>$row[$j]</td>";
+						            print "<td>$row[$j]</td><td>";
+						          print "<input type='checkbox' name='ch[]' value='{$i}'></input>";
 						          print "</tr>";
 					          }
+				          print "<input type='submit' value='book'></td>";
+      						print "</form>"; 
 					        print "</table>"; 
 					      }
 							}

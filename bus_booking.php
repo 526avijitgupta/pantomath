@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="Scripts/jquery-ui.js"></script>
 	<script type="text/javascript" src="Scripts/link_active_assign.js"></script>
 	<script type="text/javascript" src="Scripts/connect_icon_hover.js"></script>
-	<!-- <script type="text/javascript" src="Scripts/validate_form.js"></script> -->
 	<script type="text/javascript" src="Scripts/bootstrap-datepicker.js"></script>
 	<script type="text/javascript">
 
@@ -60,7 +59,6 @@
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
 					<br>
-				<!-- <form method="POST" action="actions/selectflights.php"> -->
 
 				<?php
 
@@ -68,41 +66,19 @@
 					session_start();
 					$checked = $_POST['ch'];
 					$source = $_SESSION['source'];
-					// $destination = $_SESSION['destination'];
-					$check_in = $_SESSION['check-in'];
-					$check_out = $_SESSION['check-out'];
-					$adults = $_SESSION['adults'];
-					$children = $_SESSION['children'];
-					$rooms = $_SESSION['rooms'];
-					// echo $source;
-					// echo $destination;
-					// echo $date;
-					if ($checked) {
-						// echo "Checked array returned";
-					}
+					$destination = $_SESSION['destination'];
+					$date = $_SESSION['date'];
+					echo $source;
+					echo $destination;
+					echo $date;
 					for($i=0;$i<sizeof($checked);$i++) {
+
 						echo "The loop is running $i times";
 						$row = $_SESSION['result'][$checked[$i]];
-						// if($result) {
-
-						// 	echo "The  successfullly";
-						// }
-						// echo $row[0];
-						// 
-						// 
-						$query = "insert into BookedHotels(check_in, check_out, rooms, adults, children, location) values('$check_in', '$check_out','$rooms', '$adults','$children','$source');";
-						// echo $query;
+						$query = "insert into BookedBuses(source, destination, arrival_time, departure_time, price) values('$source', '$destination', '$row[1]', '$row[2]','$row[3]');";
 						$result = mysqli_query($con, $query);
-						// if ($result) {
-						// 	echo "Addition successfull";
-						// }
-						// $query = "insert into BookedCabIDs(cab_id) select cab_id from CabPrices, CabTypes, CabNames where CabPrices.cab_id = CabTypes.cab_id and CabNames.cab_id = CabPrices.cab_id and CabPrices.cab_price='$row[2]' and CabTypes.cab_type = '$row[1]' and CabNames.cab_name = '$row[1]';";
-						// $query = "insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cb.route_id in (select cc.route_id  from CabCitites as cc where cc.acb_source = '$source' and cc.cab_destination = '$destination')";
-						$query = "insert into BookedHotelIDs(hotel_id) select hd.hotel_id from HotelData as hd where hd.location_id in (select hc.location_id from HotelCities as hc where hc.location = '$source') and hd.hotel_name = '$row[2]';";
+						$query = "insert into BookedBusIDs(bus_id) select br.bus_id from BusRoutes as br where br.route_id in (select bc.route_id from BusCities as bc where bc.bus_source = '$source' and bc.bus_destination = '$destination') and br.bus_id in (select bt.bus_id from BusTypes as bt where bt.bus_type = '$row[0]');";
 						$result = mysqli_query($con, $query);
-						// if ($result) {
-						// 	echo "Addition successfull od ids";
-						// }
 						echo "<h4>Booking successful!</h4>";
 					}
 				?>

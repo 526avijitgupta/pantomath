@@ -69,7 +69,7 @@
 						<div class="form-group col-sm-4">
 							<br>
 							<label for="depart on">Depart on</label>
-							<input type="text" class="form-control" id="depart-on" placeholder="Pick a date">
+							<input type="text" class="form-control" name="date" id="depart-on" placeholder="Pick a date">
 							<span class="ion-calendar pointer" id="date-picker"></span>
 							<br>
 						</div>
