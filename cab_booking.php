@@ -69,24 +69,32 @@
 					$checked = $_POST['ch'];
 					$source = $_SESSION['source'];
 					$destination = $_SESSION['destination'];
+					$date = $_SESSION['date'];
+					echo $source;
+					echo $destination;
+					echo $date;
 					if ($checked) {
 						// echo "Checked array returned";
 					}
 					for($i=0;$i<sizeof($checked);$i++) {
-
+						echo "The loop is running $i times";
 						$row = $_SESSION['result'][$checked[$i]];
 						// if($result) {
 
 						// 	echo "The  successfullly";
 						// }
 						// echo $row[0];
-						$query = "insert into BookedFlights(source, destination, arrival_time, departure_time, price) values('$source','$destination','$row[1]','$row[2]','$row[3]')";
+						// 
+						// 
+						$query = "insert into BookedCabs(name, type, source, destination, date, price) values('$row[0]', '$row[1]', '$source', '$destination', '$date', '$row[2]');";
 						// echo $query;
 						$result = mysqli_query($con, $query);
 						// if ($result) {
 						// 	echo "Addition successfull";
 						// }
-						$query = "insert into BookedFlightIDs(flight_id) select flight_id from FlightData where flight_arr_time = '$row[1]' and flight_dept_time = '$row[2]' and flight_price = '$row[3]'";
+						// $query = "insert into BookedCabIDs(cab_id) select cab_id from CabPrices, CabTypes, CabNames where CabPrices.cab_id = CabTypes.cab_id and CabNames.cab_id = CabPrices.cab_id and CabPrices.cab_price='$row[2]' and CabTypes.cab_type = '$row[1]' and CabNames.cab_name = '$row[1]';";
+						// $query = "insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cb.route_id in (select cc.route_id  from CabCitites as cc where cc.acb_source = '$source' and cc.cab_destination = '$destination')";
+						$query = "insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cr.route_id in (select cc.route_id from CabCities as cc where cc.cab_source = '$source' and cc.cab_destination = '$destination') and cr.cab_id in (select ct.cab_id from CabTypes as ct where ct.cab_type = '$row[1]');";
 						$result = mysqli_query($con, $query);
 						// if ($result) {
 						// 	echo "Addition successfull od ids";

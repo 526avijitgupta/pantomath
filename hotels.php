@@ -53,7 +53,7 @@
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
 					<!-- <br> -->
-					<form role="form" action="hotels.php" method="post">
+					<form role="form" action="searchhotels.php" method="post">
 						<div class="form-group col-sm-11">
 							<br>
 							<label for="Where">Where</label>
@@ -65,14 +65,14 @@
 						<div class="form-group col-sm-4">
 							<br>
 							<label for="check-in">Check In</label>
-							<input type="text" class="form-control" id="check-in" placeholder="Pick a date">
+							<input type="text" class="form-control" name="check-in" id="check-in" placeholder="Pick a date">
 							<span class="ion-calendar pointer" id="date-picker" style="margin-left:-7px;"></span>
 							<br><br>
 						</div>
 						<div class="form-group col-sm-4 inline-form-marginleft">
 							<br>
 							<label for="check-out">Check Out</label>
-							<input type="text" class="form-control" id="check-out" placeholder="Pick a date">
+							<input type="text" class="form-control" name="check-out" id="check-out" placeholder="Pick a date">
 							<span class="ion-calendar pointer" id="date-picker" style="margin-left:-7px;"></span>
 							<br><br>
 						</div>
@@ -83,7 +83,7 @@
 							<br>
 							<label for="adults">Rooms</label>
 							<br>
-							<select class="form-select-inline" id="adults">
+							<select class="form-select-inline" name="rooms" id="adults">
 								<option value="" selected>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -93,7 +93,7 @@
 							<br>
 							<label for="children">Adults</label>
 							<br>
-							<select class="form-select-inline" id="adults">
+							<select class="form-select-inline" name="adults" id="adults">
 								<option value="1" selected>1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -110,7 +110,7 @@
 							<br>
 							<label for="infants">Children</label>
 							<br>
-							<select class="form-select-inline" id="adults">
+							<select class="form-select-inline" name="children" id="adults">
 								<option value="0" selected>0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -123,11 +123,11 @@
 							</select>
 							<small class="small">0-11 years</small>
 							<br><br>
-						</div>
-						</div>
-							<button class="btn btn-warning" id="search-flights-btn" type="submit" formaction="hotels.php">Search Hotels</button>
+						<!-- </div> -->
+							<button class="btn btn-warning" id="search-flights-btn" type="submit" formaction="searchhotels.php">Search Hotels</button>
 						</div>
 					</form>
+						</div>
 				<div class="col-md-11" style="border-bottom:1px dotted silver;"></div>
 		</div>
 

@@ -53,34 +53,47 @@
 
 			<div class="col-sm-7 content-sub-container" id="flights-content">
 				<div class="content-head-wrap inline-form-marginleft">
-					<h2><strong>Search  buses</strong></h2>
+					<h2><strong>Search results</strong></h2>
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
 					<br>
-					<form class="inline-form" role="form" action="searchbuses.php" method="post">
-						<div class="form-group col-sm-5">
-							<label for="from">From</label>
-							<input type="text" name="source" class="form-control" id="from" placeholder="Select a city">
-						</div>
-						<div class="form-group col-sm-5 inline-form-marginleft">
-							<label for="to">To</label>
-							<input type="text" name="destination" class="form-control" id="to" placeholder="Select a city">
-						</div>
-						<div class="form-group col-sm-4">
-							<br>
-							<label for="depart on">Depart on</label>
-							<input type="text" class="form-control" id="depart-on" placeholder="Pick a date">
-							<span class="ion-calendar pointer" id="date-picker"></span>
-							<br>
-						</div>
-							<button type="submit" formaction="searchbuses.php" class="btn btn-warning" id="search-flights-btn">Search Buses</button>
-						</div>
-					</form>
-						</div>
-					<div class="col-md-11" style="border-bottom:1px dotted silver;">
-						<br>
-					</div>
-		</div>
+
+					<?php
+
+					 	if($_SERVER['REQUEST_METHOD']=='POST') {
+
+							require_once('connection.php');
+							$source_city = $_POST['source'];
+							$destination_city = $_POST['destination'];
+
+							$query = "select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = '$source_city' and bus_destination = '$destination_city'));";
+							$result = mysqli_query($con, $query);
+
+							if( !$result ) {
+
+								echo "The query returned nothing!";
+							} else {
+
+								if(mysqli_num_rows($result)>0){  //if a table is returned, display the table 
+					      	print "<table border=1>";
+					          for($i=0;$i<mysqli_num_rows($result);$i++){
+
+					            $row = mysqli_fetch_array($result,MYSQL_NUM);
+					            print "<tr>";
+					            for($j=0;$j<count($row);$j++)
+						            print "<td>$row[$j]</td>";
+						          print "</tr>";
+					          }
+					        print "</table>"; 
+					      }
+							}
+						}
+					?>
+				</div>
+				<div class="col-md-11" style="border-bottom:1px dotted silver;">
+					<br>
+				</div>
+			</div>
 
 		<br><br>
 
