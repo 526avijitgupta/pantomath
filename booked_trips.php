@@ -53,64 +53,63 @@
 
 			<div class="col-sm-7 content-sub-container" id="flights-content">
 				<div class="content-head-wrap inline-form-marginleft">
-					<h2><strong>Search results</strong></h2>
+					<h2><strong>Booked buses</strong></h2>
 				</div>
+				<form role="form" action="booked_trips.php" method="post">
+				<select name="select">
+					<option value="BookedFlights">Booked Flights</option>
+					<option value="BookedHotels">Booked Hotels</option>
+					<option value="BookedCabs">Booked Cabs</option>
+					<option value="BookedBuses">Booked Buses</option>
+				</select>
+				<!-- <input type="submit" name="submit"> -->
+				<button type="submit" formaction="booked_trips.php" name="submit">Submit</button>
+			</form>
 				<div class="sub-container-forms inline-form-marginleft">
-					<br>
+				  
+				  <?php
+             
+		     	require("connection.php");
+		     	//echo"hello";
+		     	if($_SERVER['REQUEST_METHOD']=='POST')
+		     	{
+		     //	echo "hello";
+         	$tablename=$_POST['select'];
+         	//echo $tablename;
+         	require("connection.php");
+		     	$query="select * from $tablename";
 
-					<?php
-
-					 	if($_SERVER['REQUEST_METHOD']=='POST') {
-
-							require_once('connection.php');
-							session_start();
-							$source_city = $_POST['source'];
-							$destination_city = $_POST['destination'];
-							$date = $_POST['date'];
-							$_SESSION['source'] = $source_city;
-							$_SESSION['destination'] = $destination_city;
-							$_SESSION['date'] = $date;
-
-							$query = "call sb('$source_city', '$destination_city')";
-							$result = mysqli_query($con, $query);
-
-							if( !$result ) {
-
-								echo "The query returned nothing!";
-							} else {
-
-								if(mysqli_num_rows($result)>0){  //if a table is returned, display the table 
-					      	print "<table border=1>";
-					      	print "<form action='bus_booking.php' method='post'>";
-					          for($i=0;$i<mysqli_num_rows($result);$i++){
-
-					            $row = mysqli_fetch_array($result,MYSQL_NUM);
-					            $_SESSION['result'][$i] = $row;
-					            print "<tr>";
-					            for($j=0;$j<count($row);$j++)
-						            print "<td>$row[$j]</td><td>";
-						          print "<input type='checkbox' name='ch[]' value='{$i}'></input>";
-						          print "</tr>";
-					          }
-				          print "<input type='submit' value='book'></td>";
-      						print "</form>"; 
-					        print "</table>"; 
-					      }
-							}
-						}
-					?>
+				     $result=mysqli_query($con,$query);
+             // $row = mysqli_fetch_array($result,MYSQL_NUM);
+				     if ($result)
+				     {
+				   //  	echo "OKAY";
+				     }
+				     if(mysqli_num_rows($result)>0){  //if a table is returned, display the table 
+				     //	echo "Hello";
+        			print "<table border=1>";
+            	for($i=0;$i<mysqli_num_rows($result);$i++){
+               $row = mysqli_fetch_array($result,MYSQL_NUM);
+               print "<tr>";
+               for($j=0;$j<count($row);$j++)
+                  print "<td>$row[$j]</td>";
+               print "</tr>";
+            }
+          print "</table>"; 
+        }
+        }
+				  ?>
 				</div>
 				<div class="col-md-11" style="border-bottom:1px dotted silver;">
-					<br>
+				  <br>
 				</div>
 			</div>
-
-		<br><br>
-
+		
 		<?php
 			require_once('footer.php');
 		?>
 
+		</div>
 	</div>
 </body>
 </html>

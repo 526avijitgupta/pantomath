@@ -80,13 +80,14 @@
 						// 	echo "The  successfullly";
 						// }
 						// echo $row[0];
-						$query = "insert into BookedFlights(source, destination, arrival_time, departure_time, price) values('$source','$destination','$row[1]','$row[2]','$row[3]')";
+						$query = "call fbooking('$source','$destination','$row[1]','$row[2]','$row[3]')";
 						// echo $query;
 						$result = mysqli_query($con, $query);
 						// if ($result) {
 						// 	echo "Addition successfull";
+						require ('connection.php');
 						// }
-						$query = "insert into BookedFlightIDs(flight_id) select flight_id from FlightData where flight_arr_time = '$row[1]' and flight_dept_time = '$row[2]' and flight_price = '$row[3]'";
+						$query = "call fbookingid('$row[1]','$row[2]','$row[3]')";
 						$result = mysqli_query($con, $query);
 						// if ($result) {
 						// 	echo "Addition successfull od ids";

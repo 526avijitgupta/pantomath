@@ -1,10 +1,7 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UseMe.com - Flight Booking</title>
+	<title>Pantomath.com - Bus Booking</title>
 	<link rel="stylesheet" href="Styles/bootstrap.min.css">
 	<link rel="stylesheet" href="Styles/main.css">
 	<link rel="stylesheet" href="Styles/ionicons.css">
@@ -16,22 +13,23 @@
 	<script type="text/javascript" src="Scripts/bootstrap-datepicker.js"></script>
 	<script type="text/javascript">
 
-	airports_list = ["Delhi", "Mumbai", "Chennai", "Bangalore", "Goa"];
+	buses_list = ["Delhi", "Mumbai", "Chennai", "Bangalore", "Goa", "Lucknow", "Hyderabad", "Kanpur"];
 
 	$(function(){
 
 		//For Autocomplete
 		$('#from').autocomplete({
-			source: airports_list
+			
+			source: buses_list
 		});
 		$('#to').autocomplete({
-			source: airports_list
+			
+			source: buses_list
 		});
 
 		//For Datepicker
 		$('#depart-on').datepicker();
 	});
-
 	</script>
 </head>
 <body>
@@ -55,42 +53,42 @@
 
 			<div class="col-sm-7 content-sub-container" id="flights-content">
 				<div class="content-head-wrap inline-form-marginleft">
-					<h2><strong>Search results</strong></h2>
+					<h2><strong>Search  buses</strong></h2>
 				</div>
-				<div class="sub-container-forms inline-form-marginleft">
+				<d
+				   iv class="sub-container-forms inline-form-marginleft">
 					<br>
-
-				<?php
-
-					require ('connection.php');
-					session_start();
-					$checked = $_POST['ch'];
-					$source = $_SESSION['source'];
-					$destination = $_SESSION['destination'];
-					$date = $_SESSION['date'];
-					echo $source;
-					echo $destination;
-					echo $date;
-					for($i=0;$i<sizeof($checked);$i++) {
-
-						echo "The loop is running $i times";
-						$row = $_SESSION['result'][$checked[$i]];
-						$query = "call bbooking('$source', '$destination', '$row[1]', '$row[2]','$row[3]');";
-						$result = mysqli_query($con, $query);
-						require ('connection.php');	
-						$query = "call bbookingid('$source','$destination','$row[0]');";
-						$result = mysqli_query($con, $query);
-						echo "<h4>Booking successful!</h4>";
-					}
-				?>
-
+					<form class="inline-form" role="form" action="searchbuses.php" method="post">
+						<div class="form-group col-sm-5">
+							<label for="from">From</label>
+							<input type="text" name="source" class="form-control" id="from" placeholder="Select a city">
+						</div>
+						<div class="form-group col-sm-5 inline-form-marginleft">
+							<label for="to">To</label>
+							<input type="text" name="destination" class="form-control" id="to" placeholder="Select a city">
+						</div>
+						<div class="form-group col-sm-4">
+							<br>
+							<label for="depart on">Depart on</label>
+							<input type="text" class="form-control" name="date" id="depart-on" placeholder="Pick a date">
+							<span class="ion-calendar pointer" id="date-picker"></span>
+							<br>
+						</div>
+							<button type="submit" formaction="searchbuses.php" class="btn btn-warning" id="search-flights-btn">Search Buses</button>
+						</div>
+					</form>
+						</div>
+					<div class="col-md-11" style="border-bottom:1px dotted silver;">
+						<br>
+					</div>
 		</div>
-	</div>
 
 		<br><br>
+
 		<?php
 			require_once('footer.php');
 		?>
-</div>
+
+	</div>
 </body>
 </html>

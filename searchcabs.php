@@ -73,20 +73,14 @@
 		$_SESSION['destination'] = $destination_city;
 		$_SESSION['date'] = $date;
 
-		// $query = "Select * from FlightCities where flight_source = " . '"' . $source_city . '"' . " and flight_destination =  " . '"' . $destination_city . '"' ;
-		// $query = "Select route_id from FlightCities where flight_source = '$source_city' and flight_destination = '$destination_city'";
-		$query = "select cn.cab_name , ct.cab_type, cp.cab_price from CabNames as cn, CabTypes as ct, CabPrices as cp where cp.cab_id = ct.cab_id and ct.cab_id = cn.cab_id and ct.cab_id in (Select cr.cab_id from CabRoutes as cr, CabCities as cc, CabTypes as ct where cr.route_id = cc.route_id and cc.route_id in (select route_id from CabCities where cab_source = '$source_city' and cab_destination = '$destination_city'));";
-		// echo $query;
+		$query = "call sc('$source_city', '$destination_city')";
+		// $query = "select cn.cab_name , ct.cab_type, cp.cab_price from CabNames as cn, CabTypes as ct, CabPrices as cp where cp.cab_id = ct.cab_id and ct.cab_id = cn.cab_id and ct.cab_id in (Select cr.cab_id from CabRoutes as cr, CabCities as cc, CabTypes as ct where cr.route_id = cc.route_id and cc.route_id in (select route_id from CabCities where cab_source = '$source_city' and cab_destination = '$destination_city'));";
 		$result = mysqli_query($con, $query);
-
-		// $_SESSION['result'] = $result;
 
 		if( !$result ) {
 
 			echo "The query returned nothing!";
 		} else {
-			// $row = mysqli_fetch_array($result,MYSQL_NUM);
-			// echo $row[1];
 
 			if(mysqli_num_rows($result)>0){  //if a table is returned, display the table 
       	print "<table border=1>";

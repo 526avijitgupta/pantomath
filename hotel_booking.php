@@ -90,7 +90,7 @@
 						// echo $row[0];
 						// 
 						// 
-						$query = "insert into BookedHotels(check_in, check_out, rooms, adults, children, location) values('$check_in', '$check_out','$rooms', '$adults','$children','$source');";
+						$query = "call hbooking('$check_in', '$check_out','$rooms', '$adults','$children','$source');";
 						// echo $query;
 						$result = mysqli_query($con, $query);
 						// if ($result) {
@@ -98,7 +98,8 @@
 						// }
 						// $query = "insert into BookedCabIDs(cab_id) select cab_id from CabPrices, CabTypes, CabNames where CabPrices.cab_id = CabTypes.cab_id and CabNames.cab_id = CabPrices.cab_id and CabPrices.cab_price='$row[2]' and CabTypes.cab_type = '$row[1]' and CabNames.cab_name = '$row[1]';";
 						// $query = "insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cb.route_id in (select cc.route_id  from CabCitites as cc where cc.acb_source = '$source' and cc.cab_destination = '$destination')";
-						$query = "insert into BookedHotelIDs(hotel_id) select hd.hotel_id from HotelData as hd where hd.location_id in (select hc.location_id from HotelCities as hc where hc.location = '$source') and hd.hotel_name = '$row[2]';";
+						require ('connection.php');
+						$query = "call hbookingid('$source','$row[2]');";
 						$result = mysqli_query($con, $query);
 						// if ($result) {
 						// 	echo "Addition successfull od ids";

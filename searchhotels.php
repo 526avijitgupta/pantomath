@@ -57,10 +57,7 @@
 
 				 	if($_SERVER['REQUEST_METHOD']=='POST') {
 				 		session_start();
-				 		// print_r($_POST);
 						require_once('connection.php');
-						// $children = $_POST['children'];
-						// echo $children;
 
 						$source_city = $_POST['source'];
 						$check_in = $_POST['check-in'];
@@ -75,7 +72,7 @@
 						$_SESSION['children'] = $children;
 						$_SESSION['rooms'] = $rooms;
 
-						$query = "select hr.hotel_rating, hp.hotel_price, hd.hotel_name from HotelRatings as hr, HotelPrices as hp, HotelData as hd where hr.hotel_id = hp.hotel_id and hd.hotel_id = hp.hotel_id and hd.location_id in (select hc.location_id from HotelCities as hc, HotelData as hd where hc.location_id = hd.location_id and hd.location_id in(select location_id from HotelCities where location = '$source_city'));";
+						$query = "call sh('$source_city')";
 						$result = mysqli_query($con, $query);
 
 						if( !$result ) {

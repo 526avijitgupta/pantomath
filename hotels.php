@@ -84,9 +84,9 @@
 							<label for="adults">Rooms</label>
 							<br>
 							<select class="form-select-inline" name="rooms" id="adults">
-								<option value="" selected>1</option>
-								<option>2</option>
-								<option>3</option>
+								<option value="1" selected>1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
 							</select>
 						</div>
 						<div class="form-group col-sm-2 inline-form-select" style="margin-left:60px;">
@@ -144,29 +144,19 @@
 
 
 <?php
-	// $source_city = "NULL";
-	// $destination_city = "NULL";
 
  	if($_SERVER['REQUEST_METHOD']=='POST') {
 
- 		// print_r($_POST);
 		require_once('connection.php');
-		// $children = $_POST['children'];
-		// echo $children;
 		$source_city = $_POST['source'];
 
-		// $query = "Select * from FlightCities where flight_source = " . '"' . $source_city . '"' . " and flight_destination =  " . '"' . $destination_city . '"' ;
-		// $query = "Select route_id from FlightCities where flight_source = '$source_city' and flight_destination = '$destination_city'";
 		$query = "select hr.hotel_rating, hp.hotel_price, hd.hotel_name from HotelRatings as hr, HotelPrices as hp, HotelData as hd where hr.hotel_id = hp.hotel_id and hd.hotel_id = hp.hotel_id and hd.location_id in (select hc.location_id from HotelCities as hc, HotelData as hd where hc.location_id = hd.location_id and hd.location_id in(select location_id from HotelCities where location = '$source_city'));";
-		// echo $query;
 		$result = mysqli_query($con, $query);
 
 		if( !$result ) {
 
 			echo "The query returned nothing!";
 		} else {
-			// $row = mysqli_fetch_array($result,MYSQL_NUM);
-			// echo $row[1];
 
 			if(mysqli_num_rows($result)>0){  //if a table is returned, display the table 
       	print "<table border=1>";

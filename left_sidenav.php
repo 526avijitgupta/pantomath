@@ -21,7 +21,7 @@
 		&nbsp;&nbsp;Cabs&nbsp;&nbsp;&nbsp;
 		<span class="ion-ios7-arrow-right fwd-right"></span>
 	</button>
-	<button type="button" class="btn btn-default" id="booked-trips" title="See the trips already booked" onclick="location.href='booked-trips.php'">
+	<button type="button" class="btn btn-default" id="booked-trips" title="See the trips already booked" onclick="location.href='booked_trips.php'">
 		<span class="ion-filing left-aside-ionicons"></span>
 		&nbsp;&nbsp;Booked trips&nbsp;&nbsp;&nbsp;
 		<span class="ion-ios7-arrow-right fwd-right"></span>

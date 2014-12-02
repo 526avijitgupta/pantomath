@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="Scripts/jquery-ui.js"></script>
 	<script type="text/javascript" src="Scripts/link_active_assign.js"></script>
 	<script type="text/javascript" src="Scripts/connect_icon_hover.js"></script>
-	<!-- <script type="text/javascript" src="Scripts/validate_form.js"></script> -->
 	<script type="text/javascript" src="Scripts/bootstrap-datepicker.js"></script>
 	<script type="text/javascript">
 
@@ -56,51 +55,54 @@
 
 			<div class="col-sm-7 content-sub-container" id="flights-content">
 				<div class="content-head-wrap inline-form-marginleft">
-					<h2><strong>Search results</strong></h2>
+					<h2><strong>Cancel orders</strong></h2>
 				</div>
 				<div class="sub-container-forms inline-form-marginleft">
 					<br>
-				<!-- <form method="POST" action="actions/selectflights.php"> -->
 
 				<?php
 
 					require ('connection.php');
 					session_start();
 					$checked = $_POST['ch'];
-					$source = $_SESSION['source'];
-					$destination = $_SESSION['destination'];
-					$date = $_SESSION['date'];
-					echo $source;
-					echo $destination;
-					echo $date;
-					if ($checked) {
-						// echo "Checked array returned";
-					}
+					$tablename = $_SESSION['tablename'];
 					for($i=0;$i<sizeof($checked);$i++) {
+
 						echo "The loop is running $i times";
 						$row = $_SESSION['result'][$checked[$i]];
-						// if($result) {
-
-						// 	echo "The  successfullly";
-						// }
-						// echo $row[0];
-						// 
-						// 
-						$query = "call cbooking('$row[0]', '$row[1]', '$source', '$destination', '$date', '$row[2]');";
-						// echo $query;
-						$result = mysqli_query($con, $query);
-						// if ($result) {
-						require ('connection.php');
-						// 	echo "Addition successfull";
-						// }
-						// $query = "insert into BookedCabIDs(cab_id) select cab_id from CabPrices, CabTypes, CabNames where CabPrices.cab_id = CabTypes.cab_id and CabNames.cab_id = CabPrices.cab_id and CabPrices.cab_price='$row[2]' and CabTypes.cab_type = '$row[1]' and CabNames.cab_name = '$row[1]';";
-						// $query = "insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cb.route_id in (select cc.route_id  from CabCitites as cc where cc.acb_source = '$source' and cc.cab_destination = '$destination')";
-						$query = "call cbookingid('$source','$destination','$row[1]')";
-						$result = mysqli_query($con, $query);
-						// if ($result) {
-						// 	echo "Addition successfull od ids";
-						// }
-						echo "<h4>Booking successful!</h4>";
+						
+						// $query = "call bbooking('$source', '$destination', '$row[1]', '$row[2]','$row[3]');";
+						if($tablename == 'BookedHotels') {
+							$query = "delete from $tablename where bh_id = $row[0];";
+							mysqli_query($con, $query);
+							require ('connection.php');
+							$query = "delete from BookedHotelIDs where bh_id = $row[0];";
+							mysqli_query($con, $query);
+						}
+						if($tablename == 'BookedCabs') {
+							$query = "delete from $tablename where bc_id = $row[0];";
+							mysqli_query($con, $query);
+							require ('connection.php');
+							$query = "delete from BookedCabIDs where bc_id = $row[0];";
+							mysqli_query($con, $query);
+						}
+						if($tablename == 'BookedFlights') {
+							$query = "delete from $tablename where bf_id = $row[0];";
+							mysqli_query($con, $query);
+							require ('connection.php');
+							$query = "delete from BookedFlightIDs where bf_id = $row[0];";
+							mysqli_query($con, $query);
+						}
+						if($tablename == 'BookedBuses') {
+							$query = "delete from $tablename where bb_id = $row[0];";
+							mysqli_query($con, $query);
+							require ('connection.php');
+							$query = "delete from BookedBusIDs where bb_id = $row[0];";
+							mysqli_query($con, $query);
+						}
+						
+						// $result = mysqli_query($con, $query);
+						echo "<h4>Deletion successful!</h4>";
 					}
 				?>
 
