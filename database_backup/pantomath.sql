@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2014 at 05:03 AM
+-- Generation Time: Dec 04, 2014 at 01:22 AM
 -- Server version: 5.5.40
 -- PHP Version: 5.3.10-1ubuntu3.15
 
@@ -38,6 +38,64 @@ insert into BookedBusIDs(bus_id) select br.bus_id from BusRoutes as br where br.
 
 end$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `budselect`()
+begin
+DECLARE done INT DEFAULT 0;
+DECLARE price int;
+DECLARE arr_time varchar(20);
+DECLARE dept_time varchar(20);
+DECLARE NameCursor CURSOR	FOR SELECT bus_arr_time, bus_dept_time, bus_price FROM BusData;
+
+OPEN NameCursor;
+read_loop: LOOP
+	FETCH NameCursor INTO arr_time, dept_time, price;
+	IF done=25 THEN
+	    LEAVE read_loop;
+	END IF;
+	    SET done = done + 1;
+        select arr_time, dept_time, price;
+	END LOOP;
+CLOSE NameCursor;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `bus_select`()
+begin
+DECLARE done INT DEFAULT 0;
+DECLARE price int;
+DECLARE arr_time varchar(20);
+DECLARE dept_time varchar(20);
+DECLARE NameCursor CURSOR FOR SELECT bus_arr_time, bus_dept_time, bus_price FROM BusData;
+
+OPEN NameCursor;
+read_loop: LOOP
+FETCH NameCursor INTO arr_time, dept_time, price;
+IF done=25 THEN
+    LEAVE read_loop;
+END IF;
+    SET done = done + 1;
+        select arr_time, dept_time, price;
+END LOOP;
+CLOSE NameCursor;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cab_select`()
+begin
+DECLARE done INT DEFAULT 0;
+DECLARE price int;
+DECLARE NameCursor CURSOR FOR SELECT cab_price FROM CabPrices;
+
+OPEN NameCursor;
+read_loop: LOOP
+    FETCH NameCursor INTO price;
+    IF done=25 THEN
+        LEAVE read_loop;
+    END IF;
+        SET done = done + 1;
+        select price;
+    END LOOP;
+CLOSE NameCursor;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cbooking`(in name1 varchar(30),in type1 varchar(30),in src varchar(30),in dest varchar(30),in date varchar(30),in cost int)
 begin
 
@@ -49,6 +107,53 @@ begin
 insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cr.route_id in (select cc.route_id from CabCities as cc where cc.cab_source = src and cc.cab_destination = dest) and cr.cab_id in (select ct.cab_id from CabTypes as ct where ct.cab_type = type);
 
 end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dbbooking`(in id int)
+begin
+   delete from BookedBuses where bb_id = id;
+    
+    end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dbbookingid`(in id int)
+begin
+   delete from BookedBusIDs where bb_id = id;
+    
+    end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dcbooking`(in id int)
+begin
+   delete from BookedCabs where bc_id = id;
+    
+    end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dcbookingid`(in id int)
+begin
+   delete from BookedCabIDs where bc_id = id;    
+    end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dfbooking`(in id int)
+begin
+   delete from BookedFlights where bf_id = id;
+    
+    end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dfbookingid`(in id int)
+begin
+   delete from BookedFlightIDs where bf_id = id;
+    
+    end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dhbooking`(in id int)
+begin
+    delete from BookedHotels where bh_id = id;
+    
+    end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dhbookingid`(in id int)
+begin
+    delete from BookedHotelIDs where bh_id = id;
+    
+    end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `fbooking`(in src varchar(30),in dest varchar(30),in arr varchar(30),in dept varchar(30),in cost int)
 begin
@@ -62,6 +167,26 @@ begin
 insert into BookedFlightIDs(flight_id) select flight_id from FlightData where flight_arr_time = arr and flight_dept_time = dept and flight_price = cost;
 end$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `flight_select`()
+begin
+DECLARE done INT DEFAULT 0;
+DECLARE price int;
+DECLARE arr_time varchar(20);
+DECLARE dept_time varchar(20);
+DECLARE NameCursor CURSOR FOR SELECT flight_arr_time, flight_dept_time, flight_price FROM FlightData;
+
+OPEN NameCursor;
+read_loop: LOOP
+    FETCH NameCursor INTO arr_time, dept_time, price;
+    IF done=25 THEN
+        LEAVE read_loop;
+    END IF;
+        SET done = done + 1;
+        select arr_time, dept_time, price;
+    END LOOP;
+CLOSE NameCursor;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `hbooking`(in checkin varchar(30),in checkout varchar(30),in room int,in adult int,in child int,place varchar(30))
 begin
 
@@ -73,6 +198,24 @@ begin
 
 insert into BookedHotelIDs(hotel_id) select hd.hotel_id from HotelData as hd where hd.location_id in (select hc.location_id from HotelCities as hc where hc.location = src) and hd.hotel_name = name;
 end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `hotel_select`()
+begin
+DECLARE done INT DEFAULT 0;
+DECLARE name varchar(80);
+DECLARE NameCursor CURSOR FOR SELECT hotel_name FROM HotelData;
+
+OPEN NameCursor;
+read_loop: LOOP
+    FETCH NameCursor INTO name;
+    IF done=25 THEN
+        LEAVE read_loop;
+    END IF;
+        SET done = done + 1;
+        select name;
+    END LOOP;
+CLOSE NameCursor;
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `inparam`(in temp_id int)
 begin
@@ -137,7 +280,14 @@ CREATE TABLE IF NOT EXISTS `BookedBuses` (
   `departure_time` varchar(30) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   PRIMARY KEY (`bb_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `BookedBuses`
+--
+
+INSERT INTO `BookedBuses` (`bb_id`, `source`, `destination`, `arrival_time`, `departure_time`, `price`) VALUES
+(1, 'Chennai', 'Bangalore', '11:30', '05:15', 500);
 
 --
 -- Triggers `BookedBuses`
@@ -160,7 +310,14 @@ CREATE TABLE IF NOT EXISTS `BookedBusIDs` (
   `bb_id` int(11) NOT NULL AUTO_INCREMENT,
   `bus_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`bb_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `BookedBusIDs`
+--
+
+INSERT INTO `BookedBusIDs` (`bb_id`, `bus_id`) VALUES
+(1, 15);
 
 --
 -- Triggers `BookedBusIDs`
@@ -184,14 +341,16 @@ CREATE TABLE IF NOT EXISTS `BookedCabIDs` (
   `bc_id` int(11) NOT NULL AUTO_INCREMENT,
   `cab_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`bc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `BookedCabIDs`
 --
 
 INSERT INTO `BookedCabIDs` (`bc_id`, `cab_id`) VALUES
-(4, 2);
+(1, 55),
+(2, 56),
+(3, 57);
 
 --
 -- Triggers `BookedCabIDs`
@@ -220,14 +379,7 @@ CREATE TABLE IF NOT EXISTS `BookedCabs` (
   `date` varchar(30) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   PRIMARY KEY (`bc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `BookedCabs`
---
-
-INSERT INTO `BookedCabs` (`bc_id`, `name`, `type`, `source`, `destination`, `date`, `price`) VALUES
-(4, 'Tata Indigo or Equivalent', 'AC Mid-Size', 'New Delhi', 'Bangalore', '12/17/2014', 3117);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Triggers `BookedCabs`
@@ -250,14 +402,17 @@ CREATE TABLE IF NOT EXISTS `BookedFlightIDs` (
   `bf_id` int(11) NOT NULL AUTO_INCREMENT,
   `flight_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`bf_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `BookedFlightIDs`
 --
 
 INSERT INTO `BookedFlightIDs` (`bf_id`, `flight_id`) VALUES
-(2, 8);
+(4, 27),
+(5, 1),
+(6, 2),
+(7, 3);
 
 --
 -- Triggers `BookedFlightIDs`
@@ -285,14 +440,17 @@ CREATE TABLE IF NOT EXISTS `BookedFlights` (
   `departure_time` varchar(30) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   PRIMARY KEY (`bf_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `BookedFlights`
 --
 
 INSERT INTO `BookedFlights` (`bf_id`, `source`, `destination`, `arrival_time`, `departure_time`, `price`) VALUES
-(2, 'Delhi', 'Bangalore', '12:15', '09:30', 6500);
+(4, 'Chennai', 'Delhi', '07:55', '06:50', 8011),
+(5, 'Delhi', 'Mumbai', '19:55', '17:50', 6307),
+(6, 'Delhi', 'Mumbai', '15:25', '13:15', 6267),
+(7, 'Delhi', 'Mumbai', '07:45', '05:30', 6267);
 
 --
 -- Triggers `BookedFlights`
@@ -316,14 +474,16 @@ CREATE TABLE IF NOT EXISTS `BookedHotelIDs` (
   `bh_id` int(11) NOT NULL AUTO_INCREMENT,
   `hotel_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`bh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `BookedHotelIDs`
 --
 
 INSERT INTO `BookedHotelIDs` (`bh_id`, `hotel_id`) VALUES
-(2, 2);
+(3, 13),
+(4, 14),
+(5, 15);
 
 --
 -- Triggers `BookedHotelIDs`
@@ -352,14 +512,16 @@ CREATE TABLE IF NOT EXISTS `BookedHotels` (
   `children` int(11) DEFAULT NULL,
   `location` varchar(40) NOT NULL,
   PRIMARY KEY (`bh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `BookedHotels`
 --
 
 INSERT INTO `BookedHotels` (`bh_id`, `check_in`, `check_out`, `rooms`, `adults`, `children`, `location`) VALUES
-(2, '12/04/2014', '12/05/2014', 1, 1, 1, 'Mumbai');
+(3, '12/10/2014', '12/08/2014', 1, 1, 1, 'Chennai'),
+(4, '12/10/2014', '12/08/2014', 1, 1, 1, 'Chennai'),
+(5, '12/10/2014', '12/08/2014', 1, 1, 1, 'Chennai');
 
 --
 -- Triggers `BookedHotels`
@@ -1050,7 +1212,11 @@ CREATE TABLE IF NOT EXISTS `CancelledBuses` (
 
 INSERT INTO `CancelledBuses` (`bb_id`, `source`, `destination`, `arrival_time`, `departure_time`, `price`) VALUES
 (1, 'Bangalore', 'Hyderabad', '01:30', '14:30', 1200),
-(2, 'Bangalore', 'Hyderabad', '19:45', '11:30', 1080);
+(2, 'Chennai', 'Bangalore', '00:15', '17:45', 500),
+(3, 'Bangalore', 'Hyderabad', '01:30', '14:30', 1200),
+(4, 'Bangalore', 'Hyderabad', '19:45', '11:30', 1080),
+(5, 'Chennai', 'Bangalore', '11:30', '05:15', 500),
+(6, 'Chennai', 'Bangalore', '00:15', '17:45', 500);
 
 -- --------------------------------------------------------
 
@@ -1070,7 +1236,11 @@ CREATE TABLE IF NOT EXISTS `CancelledBusesIDs` (
 
 INSERT INTO `CancelledBusesIDs` (`bb_id`, `bus_id`) VALUES
 (1, 25),
-(2, 26);
+(2, 16),
+(3, 25),
+(4, 26),
+(5, 15),
+(6, 16);
 
 -- --------------------------------------------------------
 
@@ -1083,13 +1253,6 @@ CREATE TABLE IF NOT EXISTS `CancelledCabIDs` (
   `cab_id` int(11) NOT NULL,
   PRIMARY KEY (`bc_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `CancelledCabIDs`
---
-
-INSERT INTO `CancelledCabIDs` (`bc_id`, `cab_id`) VALUES
-(3, 1);
 
 -- --------------------------------------------------------
 
@@ -1113,7 +1276,9 @@ CREATE TABLE IF NOT EXISTS `CancelledCabs` (
 --
 
 INSERT INTO `CancelledCabs` (`bc_id`, `name`, `type`, `source`, `destination`, `date`, `price`) VALUES
-(3, 'Tata Indica or Equivalent', 'AC Economy', 'New Delhi', 'Bangalore', '12/17/2014', 3117);
+(13, 'Tata Indica or Equivalent', 'AC Economy', 'Mumbai', 'Hyderabad', '12/16/2014', 3138),
+(14, 'Tata Indigo or Equivalent', 'AC Mid-Size', 'Mumbai', 'Hyderabad', '12/16/2014', 3175),
+(15, 'Chevrolet Tavera or Equivalent', 'AC SUV Large', 'Mumbai', 'Hyderabad', '12/16/2014', 3663);
 
 -- --------------------------------------------------------
 
@@ -1132,7 +1297,9 @@ CREATE TABLE IF NOT EXISTS `CancelledFlightIDs` (
 --
 
 INSERT INTO `CancelledFlightIDs` (`bf_id`, `flight_id`) VALUES
-(1, 7);
+(1, 7),
+(2, 8),
+(3, 25);
 
 -- --------------------------------------------------------
 
@@ -1155,7 +1322,9 @@ CREATE TABLE IF NOT EXISTS `CancelledFlights` (
 --
 
 INSERT INTO `CancelledFlights` (`bf_id`, `source`, `destination`, `arrival_time`, `departure_time`, `price`) VALUES
-(1, 'Delhi', 'Bangalore', '12:30', '09:45', 6500);
+(1, 'Delhi', 'Bangalore', '12:30', '09:45', 6500),
+(2, 'Delhi', 'Bangalore', '12:15', '09:30', 6500),
+(3, 'Chennai', 'Delhi', '23:45', '21:05', 8304);
 
 -- --------------------------------------------------------
 
@@ -1174,7 +1343,10 @@ CREATE TABLE IF NOT EXISTS `CancelledHotelIDs` (
 --
 
 INSERT INTO `CancelledHotelIDs` (`bh_id`, `hotel_id`) VALUES
-(1, 1);
+(1, 1),
+(2, 2),
+(6, 16),
+(7, 17);
 
 -- --------------------------------------------------------
 
@@ -1198,7 +1370,10 @@ CREATE TABLE IF NOT EXISTS `CancelledHotels` (
 --
 
 INSERT INTO `CancelledHotels` (`bh_id`, `check_in`, `check_out`, `rooms`, `adults`, `children`, `location`) VALUES
-(1, '12/04/2014', '12/05/2014', 1, 1, 1, 'Mumbai');
+(1, '12/04/2014', '12/05/2014', 1, 1, 1, 'Mumbai'),
+(2, '12/04/2014', '12/05/2014', 1, 1, 1, 'Mumbai'),
+(6, '12/10/2014', '12/08/2014', 1, 1, 1, 'Chennai'),
+(7, '12/10/2014', '12/08/2014', 1, 1, 1, 'Chennai');
 
 -- --------------------------------------------------------
 

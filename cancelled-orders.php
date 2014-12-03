@@ -73,33 +73,61 @@
 						
 						// $query = "call bbooking('$source', '$destination', '$row[1]', '$row[2]','$row[3]');";
 						if($tablename == 'BookedHotels') {
-							$query = "delete from $tablename where bh_id = $row[0];";
+							$query = "call dhbooking($row[0]);";
 							mysqli_query($con, $query);
 							require ('connection.php');
-							$query = "delete from BookedHotelIDs where bh_id = $row[0];";
+							$query = "call dhbookingid($row[0]);";
 							mysqli_query($con, $query);
 						}
 						if($tablename == 'BookedCabs') {
-							$query = "delete from $tablename where bc_id = $row[0];";
+							$query = "call dcbooking($row[0]);";
 							mysqli_query($con, $query);
 							require ('connection.php');
-							$query = "delete from BookedCabIDs where bc_id = $row[0];";
+							$query = "call dcbookingid($row[0]);";
 							mysqli_query($con, $query);
 						}
 						if($tablename == 'BookedFlights') {
-							$query = "delete from $tablename where bf_id = $row[0];";
+							$query = "call dfbooking($row[0]);";
 							mysqli_query($con, $query);
 							require ('connection.php');
-							$query = "delete from BookedFlightIDs where bf_id = $row[0];";
+							$query = "call dfbookingid($row[0]);";
 							mysqli_query($con, $query);
 						}
 						if($tablename == 'BookedBuses') {
-							$query = "delete from $tablename where bb_id = $row[0];";
+							$query = "call dbbooking($row[0]);";
 							mysqli_query($con, $query);
 							require ('connection.php');
-							$query = "delete from BookedBusIDs where bb_id = $row[0];";
+							$query = "call dbbookingid($row[0]);";
 							mysqli_query($con, $query);
 						}
+						// if($tablename == 'BookedHotels') {
+						// 	$query = "delete from $tablename where bh_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// 	require ('connection.php');
+						// 	$query = "delete from BookedHotelIDs where bh_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// }
+						// if($tablename == 'BookedCabs') {
+						// 	$query = "delete from $tablename where bc_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// 	require ('connection.php');
+						// 	$query = "delete from BookedCabIDs where bc_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// }
+						// if($tablename == 'BookedFlights') {
+						// 	$query = "delete from $tablename where bf_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// 	require ('connection.php');
+						// 	$query = "delete from BookedFlightIDs where bf_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// }
+						// if($tablename == 'BookedBuses') {
+						// 	$query = "delete from $tablename where bb_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// 	require ('connection.php');
+						// 	$query = "delete from BookedBusIDs where bb_id = $row[0];";
+						// 	mysqli_query($con, $query);
+						// }
 						
 						// $result = mysqli_query($con, $query);
 						echo "<h4>Deletion successful!</h4>";

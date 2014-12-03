@@ -335,6 +335,85 @@ Delimiter Book CabID:
     end//
 
 
+    Delimiter delete hotel:
+
+    delimiter //
+    create procedure dhbooking(in id int)
+    begin
+    delete from BookedHotels where bh_id = id;
+    
+    end//
+    
+    Delimiter delete hotelid:
+
+    delimiter //
+    create procedure dhbookingid(in id int)
+    begin
+    delete from BookedHotelIDs where bh_id = id;
+    
+    end//
+
+    
+    Delimiter delete Flight:
+
+    delimiter //
+    create procedure dfbooking(in id int)
+    begin
+   delete from BookedFlights where bf_id = id;
+    
+    end//
+
+    
+    Delimiter delete Flightid:
+
+    delimiter //
+    create procedure dfbookingid(in id int)
+    begin
+   delete from BookedFlightIDs where bf_id = id;
+    
+    end//
+
+
+ Delimiter delete cab:
+
+    delimiter //
+    create procedure dcbooking(in id int)
+    begin
+   delete from BookedCabs where bc_id = id;
+    end//
+
+Delimiter delete cabid:
+
+    delimiter //
+    create procedure dcbookingid(in id int)
+    begin
+   delete from BookedCabIDs where bc_id = id;    
+    end//
+
+
+
+ Delimiter delete bus:
+
+    delimiter //
+    create procedure dbbooking(in id int)
+    begin
+   delete from BookedBuses where bb_id = id;
+    
+    end//    
+
+
+Delimiter delete busid:
+
+ delimiter //
+    create procedure dbbookingid(in id int)
+    begin
+   delete from BookedBusIDs where bb_id = id;
+    
+    end//
+
+
+
+
 TRIGGERS:
 =========================================================================================================================
 
@@ -389,7 +468,6 @@ TRIGGER CabIDs:
     DELIMITER $$
     CREATE TRIGGER cancelled_orders5 
         BEFORE DELETE ON BookedCabIDs FOR EACH ROW BEGIN INSERT INTO CancelledCabIDs values(OLD.bc_id, OLD.cab_id);
-       
     END$$
 
 
