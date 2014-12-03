@@ -1,385 +1,556 @@
+
+CREATE TABLES:
+=========================================================================================================================
+
+
+CREATE TABLE HotelData (
+    hotel_id int AUTO_INCREMENT PRIMARY KEY,
+    hotel_price int,
+)
+
 CREATE TABLE HotelNames (
-hotel_id int AUTO_INCREMENT PRIMARY KEY,
-hotel_name varchar(50),
-location_id int,
+    hotel_id int AUTO_INCREMENT PRIMARY KEY,
+    hotel_name varchar(50),
+    location_id int,
 )
 
 CREATE TABLE HotelPrice (
- hotel_id int AUTO_INCREMENT PRIMARY KEY,
-hotel_price double)
+    hotel_id int AUTO_INCREMENT PRIMARY KEY,
+    hotel_price double
+)
 
 CREATE TABLE HotelRating (
- hotel_id int AUTO_INCREMENT PRIMARY KEY,
-hotel_rating float)
+    hotel_id int AUTO_INCREMENT PRIMARY KEY,
+    hotel_rating float
+)
 
 CREATE TABLE BusTypes (
-bus_id int AUTO_INCREMENT,
-bus_type varchar(100),
-PRIMARY KEY (bus_id, bus_type)
+    bus_id int AUTO_INCREMENT,
+    bus_type varchar(100),
+    PRIMARY KEY (bus_id, bus_type)
 )
 
 CREATE TABLE BusRoutes (
-bus_id int AUTO_INCREMENT,
-route_id int,
-PRIMARY KEY (bus_id, route_id)
+    bus_id int AUTO_INCREMENT,
+    route_id int,
+    PRIMARY KEY (bus_id, route_id)
 )
 
 CREATE TABLE BusCities (
-route_id int AUTO_INCREMENT PRIMARY KEY,
-bus_source varchar(30),
-bus_destination varchar(30)
+    route_id int AUTO_INCREMENT PRIMARY KEY,
+    bus_source varchar(30),
+    bus_destination varchar(30)
 )
 
 CREATE TABLE BusData (
-bus_id int AUTO_INCREMENT PRIMARY KEY,
-bus_arr_time varchar(30),
-bus_dept_time varchar(30),
-bus_price int
+    bus_id int AUTO_INCREMENT PRIMARY KEY,
+    bus_arr_time varchar(30),
+    bus_dept_time varchar(30),
+    bus_price int
 )
 
 CREATE TABLE FlightNames (
-flight_id int AUTO_INCREMENT PRIMARY KEY,
-flight_name varchar(30)
+    flight_id int AUTO_INCREMENT PRIMARY KEY,
+    flight_name varchar(30)
 )
 
 CREATE TABLE FlighRoutes (
-flight_id int AUTO_INCREMENT,
-route_id int,
-PRIMARY KEY (flight_id, route_id)
+    flight_id int AUTO_INCREMENT,
+    route_id int,
+    PRIMARY KEY (flight_id, route_id)
 )
 
 CREATE TABLE FlightCities (
-route_id int AUTO_INCREMENT PRIMARY KEY,
-flight_source varchar(30),
-flight_destination varchar(30)
+    route_id int AUTO_INCREMENT PRIMARY KEY,
+    flight_source varchar(30),
+    flight_destination varchar(30)
 )
 
 CREATE TABLE FlightTimes (
-route_id int AUTO_INCREMENT PRIMARY KEY,
-flight_source varchar(30),
-flight_destination varchar(30)
+    route_id int AUTO_INCREMENT PRIMARY KEY,
+    flight_source varchar(30),
+    flight_destination varchar(30)
 )
 
 
 CREATE TABLE FlightData (
-flight_id int AUTO_INCREMENT PRIMARY KEY,
-flight_arr_time varchar(30),
-flight_dept_time varchar(30),
-flight_price int
+    flight_id int AUTO_INCREMENT PRIMARY KEY,
+    flight_arr_time varchar(30),
+    flight_dept_time varchar(30),
+    flight_price int
 )
 
 CREATE TABLE CabPrices (
-cab_id int AUTO_INCREMENT PRIMARY KEY,
-cab_price int
+    cab_id int AUTO_INCREMENT PRIMARY KEY,
+    cab_price int
 )
 
 CREATE TABLE CabTypes (
-cab_id int AUTO_INCREMENT,
-cab_type varchar(100),
-PRIMARY KEY (cab_id, cab_type)
+    cab_id int AUTO_INCREMENT,
+    cab_type varchar(100),
+    PRIMARY KEY (cab_id, cab_type)
 )
 
 CREATE TABLE CabNames (
-cab_id int AUTO_INCREMENT,
-cab_name varchar(100),
-PRIMARY KEY (cab_id, cab_name)
+    cab_id int AUTO_INCREMENT,
+    cab_name varchar(100),
+    PRIMARY KEY (cab_id, cab_name)
 )
 
 CREATE TABLE CabRoutes (
-cab_id int AUTO_INCREMENT,
-route_id int,
-PRIMARY KEY (cab_id, route_id)
+    cab_id int AUTO_INCREMENT,
+    route_id int,
+    PRIMARY KEY (cab_id, route_id)
 )
 
 
 CREATE TABLE CabCities (
-route_id int AUTO_INCREMENT PRIMARY KEY,
-cab_source varchar(30),
-cab_destination varchar(30)
+    route_id int AUTO_INCREMENT PRIMARY KEY,
+    cab_source varchar(30),
+    cab_destination varchar(30)
 )
 
 
 CREATE TABLE BookedHotels (
-bh_id int AUTO_INCREMENT PRIMARY KEY,
-check_in varchar(30),
-check_out varchar(30),
-rooms int,
-adults int,
-children int
+    bh_id int AUTO_INCREMENT PRIMARY KEY,
+    check_in varchar(30),
+    check_out varchar(30),
+    rooms int,
+    adults int,
+    children int
 )
 
 
 CREATE TABLE BookedFlights (
-bf_id int AUTO_INCREMENT PRIMARY KEY,
-source varchar(30),
-destination varchar(30),
-arrival_time varchar(30),
-departure_time varchar(30),
-price int
+    bf_id int AUTO_INCREMENT PRIMARY KEY,
+    source varchar(30),
+    destination varchar(30),
+    arrival_time varchar(30),
+    departure_time varchar(30),
+    price int
 )
 
 
 CREATE TABLE BookedBuses (
-bb_id int AUTO_INCREMENT PRIMARY KEY,
-source varchar(30),
-destination varchar(30),
-arrival_time varchar(30),
-departure_time varchar(30),
-price int
+    bb_id int AUTO_INCREMENT PRIMARY KEY,
+    source varchar(30),
+    destination varchar(30),
+    arrival_time varchar(30),
+    departure_time varchar(30),
+    price int
 )
 
 
 CREATE TABLE BookedCabs (
-bc_id int AUTO_INCREMENT PRIMARY KEY,
-name varchar(30),
-type varchar(30),
-source varchar(30),
-destination varchar(30),
-date varchar(30),
-price int
+    bc_id int AUTO_INCREMENT PRIMARY KEY,
+    name varchar(30),
+    type varchar(30),
+    source varchar(30),
+    destination varchar(30),
+    date varchar(30),
+    price int
 )
-
 
 CREATE TABLE BookedCabs (
-bc_id int AUTO_INCREMENT PRIMARY KEY,
-name varchar(30),
-type varchar(30),
-source varchar(30),
-destination varchar(30),
-date varchar(30),
-price int
+    bc_id int AUTO_INCREMENT PRIMARY KEY,
+    name varchar(30),
+    type varchar(30),
+    source varchar(30),
+    destination varchar(30),
+    date varchar(30),
+    price int
 )
-
 
 CREATE TABLE BookedHotelIDs (
-bh_id int AUTO_INCREMENT PRIMARY KEY,
-hotel_id int
+    bh_id int AUTO_INCREMENT PRIMARY KEY,
+    hotel_id int
 )
 
 CREATE TABLE BookedFlightIDs (
-bf_id int AUTO_INCREMENT PRIMARY KEY,
-flight_id int
+    bf_id int AUTO_INCREMENT PRIMARY KEY,
+    flight_id int
 )
 
 CREATE TABLE BookedBusIDs (
-bb_id int AUTO_INCREMENT PRIMARY KEY,
-bus_id int
+    bb_id int AUTO_INCREMENT PRIMARY KEY,
+    bus_id int
 )
 
 
 CREATE TABLE BookedCabIDs (
-bc_id int AUTO_INCREMENT PRIMARY KEY,
-cab_id int
+    bc_id int AUTO_INCREMENT PRIMARY KEY,
+    cab_id int
 )
+
+
+
+QUERIES:
+==============================================================================================================================
+
 
 Search Flights:
 
-select fn.flight_name, fd.flight_arr_time, fd.flight_dept_time, fd.flight_price from FlightData as fd, FlightNames as fn where fn.flight_id = fd.flight_id and fn.flight_id in (select fr.flight_id from FlightRoutes as fr, FlightCities as fc where fc.route_id = fr.route_id and fc.route_id in (Select route_id from FlightCities where flight_source = 'Delhi' and flight_destination = 'Mumbai'));
+    select fn.flight_name, fd.flight_arr_time, fd.flight_dept_time, fd.flight_price from FlightData as fd, FlightNames as fn where fn.flight_id = fd.flight_id and fn.flight_id in (select fr.flight_id from FlightRoutes as fr, FlightCities as fc where fc.route_id = fr.route_id and fc.route_id in (Select route_id from FlightCities where flight_source = 'Delhi' and flight_destination = 'Mumbai'));
 
 Search Buses:
 
-select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = 'Lucknow' and bus_destination = 'Kanpur'));
+    select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = 'Lucknow' and bus_destination = 'Kanpur'));
 
 Search Cabs:
 
-select cn.cab_name , ct.cab_type, cp.cab_price from CabNames as cn, CabTypes as ct, CabPrices as cp where cp.cab_id = ct.cab_id and ct.cab_id = cn.cab_id and ct.cab_id in (Select cr.cab_id from CabRoutes as cr, CabCities as cc, CabTypes as ct where cr.route_id = cc.route_id and cc.route_id in (select route_id from CabCities where cab_source = 'Mumbai' and cab_destination = 'Bangalore');
+    select cn.cab_name , ct.cab_type, cp.cab_price from CabNames as cn, CabTypes as ct, CabPrices as cp where cp.cab_id = ct.cab_id and ct.cab_id = cn.cab_id and ct.cab_id in (Select cr.cab_id from CabRoutes as cr, CabCities as cc, CabTypes as ct where cr.route_id = cc.route_id and cc.route_id in (select route_id from CabCities where cab_source = 'Mumbai' and cab_destination = 'Bangalore');
 
 Search Hotels:
 
-select hr.hotel_rating, hp.hotel_price, hd.hotel_name from HotelRatings as hr, HotelPrices as hp, HotelData as hd where hr.hotel_id = hp.hotel_id and hd.hotel_id = hp.hotel_id and hd.location_id in (select hc.location_id from HotelCities as hc, HotelData as hd where hc.location_id = hd.location_id and hd.location_id in(select location_id from HotelCities where location = 'Delhi'));
+    select hr.hotel_rating, hp.hotel_price, hd.hotel_name from HotelRatings as hr, HotelPrices as hp, HotelData as hd where hr.hotel_id = hp.hotel_id and hd.hotel_id = hp.hotel_id and hd.location_id in (select hc.location_id from HotelCities as hc, HotelData as hd where hc.location_id = hd.location_id and hd.location_id in(select location_id from HotelCities where location = 'Delhi'));
 
+
+
+PROCEDURES:
+=========================================================================================================================
 
 
 Delimiter Search Flights:
 
-delimiter //
-create procedure sf(in src varchar(30),in dest varchar(30))
-begin
+    delimiter //
+    create procedure sf(in src varchar(30),in dest varchar(30))
+    begin
 
-select fn.flight_name, fd.flight_arr_time, fd.flight_dept_time, fd.flight_price from FlightData as fd, FlightNames as fn where fn.flight_id = fd.flight_id and fn.flight_id in (select fr.flight_id from FlightRoutes as fr, FlightCities as fc where fc.route_id = fr.route_id and fc.route_id in (Select route_id from FlightCities where flight_source = src and flight_destination = dest));
+    select fn.flight_name, fd.flight_arr_time, fd.flight_dept_time, fd.flight_price from FlightData as fd, FlightNames as fn where fn.flight_id = fd.flight_id and fn.flight_id in (select fr.flight_id from FlightRoutes as fr, FlightCities as fc where fc.route_id = fr.route_id and fc.route_id in (Select route_id from FlightCities where flight_source = src and flight_destination = dest));
 
-end //
+    end //
 
 Delimiter Search Buses:
 
-delimiter //
-create procedure sb(in src varchar(30),in dest varchar(30))
-begin
+    delimiter //
+    create procedure sb(in src varchar(30),in dest varchar(30))
+    begin
 
-select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time, bd.bus_price from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = src and bus_destination = dest));
+    select bt.bus_type , bd.bus_arr_time, bd.bus_dept_time, bd.bus_price from BusData as bd, BusTypes as bt where bd.bus_id = bt.bus_id and bt.bus_id in (Select br.bus_id from BusRoutes as br, BusCities as bc, BusTypes as bt where br.route_id = bc.route_id and bc.route_id in (select route_id from BusCities where bus_source = src and bus_destination = dest));
 
-end //
+    end //
 
 Delimiter Search Cabs:
 
-delimiter //
-create procedure sc(in src varchar(30),in dest varchar(30))
-begin
+    delimiter //
+    create procedure sc(in src varchar(30),in dest varchar(30))
+    begin
 
-select cn.cab_name , ct.cab_type, cp.cab_price from CabNames as cn, CabTypes as ct, CabPrices as cp where cp.cab_id = ct.cab_id and ct.cab_id = cn.cab_id and ct.cab_id in (Select cr.cab_id from CabRoutes as cr, CabCities as cc, CabTypes as ct where cr.route_id = cc.route_id and cc.route_id in (select route_id from CabCities where cab_source = src and cab_destination = dest));
+    select cn.cab_name , ct.cab_type, cp.cab_price from CabNames as cn, CabTypes as ct, CabPrices as cp where cp.cab_id = ct.cab_id and ct.cab_id = cn.cab_id and ct.cab_id in (Select cr.cab_id from CabRoutes as cr, CabCities as cc, CabTypes as ct where cr.route_id = cc.route_id and cc.route_id in (select route_id from CabCities where cab_source = src and cab_destination = dest));
 
-end //
+    end //
 
 Delimiter Search Hotels:
 
-delimiter //
-create procedure sh(in h_location varchar(30))
-begin
+    delimiter //
+    create procedure sh(in h_location varchar(30))
+    begin
 
-select hr.hotel_rating, hp.hotel_price, hd.hotel_name from HotelRatings as hr, HotelPrices as hp, HotelData as hd where hr.hotel_id = hp.hotel_id and hd.hotel_id = hp.hotel_id and hd.location_id in (select hc.location_id from HotelCities as hc, HotelData as hd where hc.location_id = hd.location_id and hd.location_id in(select location_id from HotelCities where location = h_location));
-end //
+    select hr.hotel_rating, hp.hotel_price, hd.hotel_name from HotelRatings as hr, HotelPrices as hp, HotelData as hd where hr.hotel_id = hp.hotel_id and hd.hotel_id = hp.hotel_id and hd.location_id in (select hc.location_id from HotelCities as hc, HotelData as hd where hc.location_id = hd.location_id and hd.location_id in(select location_id from HotelCities where location = h_location));
+    end //
 
 
 Delimiter Book Buses:
-delimiter //
-create procedure bbooking(in src varchar(30),in dest varchar(30),in arr varchar(30),in dept varchar(30),in cost int)
-begin
+    
+    delimiter //
+    create procedure bbooking(in src varchar(30),in dest varchar(30),in arr varchar(30),in dept varchar(30),in cost int)
+    begin
 
-insert into BookedBuses(source, destination, arrival_time, departure_time, price) values(src, dest, arr, dept , cost);
+    insert into BookedBuses(source, destination, arrival_time, departure_time, price) values(src, dest, arr, dept , cost);
 
-end//
-
-
+    end//
 
 
 Delimiter Book BusesID:
-delimiter //
-create procedure bbookingid(in src varchar(30),in dest varchar(30),in type varchar(80))
-begin
 
-insert into BookedBusIDs(bus_id) select br.bus_id from BusRoutes as br where br.route_id in (select bc.route_id from BusCities as bc where bc.bus_source = src and bc.bus_destination = dest) and br.bus_id in (select bt.bus_id from BusTypes as bt where bt.bus_type = type);
+    delimiter //
+    create procedure bbookingid(in src varchar(30),in dest varchar(30),in type varchar(80))
+    begin
 
-end//
+    insert into BookedBusIDs(bus_id) select br.bus_id from BusRoutes as br where br.route_id in (select bc.route_id from BusCities as bc where bc.bus_source = src and bc.bus_destination = dest) and br.bus_id in (select bt.bus_id from BusTypes as bt where bt.bus_type = type);
+
+    end//
 
 
 
 Delimiter Book Hotel:
-delimiter //
-create procedure hbooking(in checkin varchar(30),in checkout varchar(30),in room int,in adult int,in child int,place varchar(30))
-begin
 
-insert into BookedHotels(check_in, check_out, rooms, adults, children, location) values(checkin,checkout,room,adult,child,place);
-end//
+    delimiter //
+    create procedure hbooking(in checkin varchar(30),in checkout varchar(30),in room int,in adult int,in child int,place varchar(30))
+    begin
 
+    insert into BookedHotels(check_in, check_out, rooms, adults, children, location) values(checkin,checkout,room,adult,child,place);
+    end//
 
 
 Delimiter Book HotelsID:
-delimiter //
-create procedure hbookingid(in src varchar(30),in name varchar(30))
-begin
 
-insert into BookedHotelIDs(hotel_id) select hd.hotel_id from HotelData as hd where hd.location_id in (select hc.location_id from HotelCities as hc where hc.location = src) and hd.hotel_name = name;
-end//
+    delimiter //
+    create procedure hbookingid(in src varchar(30),in name varchar(30))
+    begin
+
+    insert into BookedHotelIDs(hotel_id) select hd.hotel_id from HotelData as hd where hd.location_id in (select hc.location_id from HotelCities as hc where hc.location = src) and hd.hotel_name = name;
+    end//
 
 
 
 Delimiter Book Flight:
-delimiter //
-create procedure fbooking(in src varchar(30),in dest varchar(30),in arr varchar(30),in dept varchar(30),in cost int)
-begin
 
-insert into BookedFlights(source, destination, arrival_time, departure_time, price) values(src,dest,arr,dept,cost);
-end//
+    delimiter //
+    create procedure fbooking(in src varchar(30),in dest varchar(30),in arr varchar(30),in dept varchar(30),in cost int)
+    begin
+
+    insert into BookedFlights(source, destination, arrival_time, departure_time, price) values(src,dest,arr,dept,cost);
+    end//
 
 
 Delimiter Book FlightID:
-delimiter //
-create procedure fbookingid(in arr varchar(30),in dept varchar(30),in cost int)
-begin
+    
+    delimiter //
+    create procedure fbookingid(in arr varchar(30),in dept varchar(30),in cost int)
+    begin
 
-insert into BookedFlightIDs(flight_id) select flight_id from FlightData where flight_arr_time = arr and flight_dept_time = dept and flight_price = cost;
-end//
+    insert into BookedFlightIDs(flight_id) select flight_id from FlightData where flight_arr_time = arr and flight_dept_time = dept and flight_price = cost;
+    end//
 
 
 Delimiter Book Cab:
-delimiter //
-create procedure cbooking(in name1 varchar(30),in type1 varchar(30),in src varchar(30),in dest varchar(30),in date varchar(30),in cost int)
-begin
 
-insert into BookedCabs(name, type, source, destination, date, price) values(name1,type1,src,dest,date,cost);
-end//
+    delimiter //
+    create procedure cbooking(in name1 varchar(30),in type1 varchar(30),in src varchar(30),in dest varchar(30),in date varchar(30),in cost int)
+    begin
+
+    insert into BookedCabs(name, type, source, destination, date, price) values(name1,type1,src,dest,date,cost);
+    end//
 
 
 Delimiter Book CabID:
-delimiter //
-create procedure cbookingid(in src varchar(30),in dest varchar(30),in type varchar(30))
-begin
 
-insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cr.route_id in (select cc.route_id from CabCities as cc where cc.cab_source = src and cc.cab_destination = dest) and cr.cab_id in (select ct.cab_id from CabTypes as ct where ct.cab_type = type);
+    delimiter //
+    create procedure cbookingid(in src varchar(30),in dest varchar(30),in type varchar(30))
+    begin
 
-end//
+    insert into BookedCabIDs(cab_id) select cr.cab_id from CabRoutes as cr where cr.route_id in (select cc.route_id from CabCities as cc where cc.cab_source = src and cc.cab_destination = dest) and cr.cab_id in (select ct.cab_id from CabTypes as ct where ct.cab_type = type);
 
+    end//
+
+
+TRIGGERS:
+=========================================================================================================================
 
 
 TRIGGER Hotel:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders 
-    BEFORE DELETE ON BookedHotels
-    FOR EACH ROW BEGIN
-    INSERT INTO CancelledHotels values(OLD.bh_id, OLD.check_in, OLD.check_out, OLD.rooms, OLD.adults, OLD.children, OLD.location);
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders 
+        BEFORE DELETE ON BookedHotels
+        FOR EACH ROW BEGIN
+        INSERT INTO CancelledHotels values(OLD.bh_id, OLD.check_in, OLD.check_out, OLD.rooms, OLD.adults, OLD.children, OLD.location);
+    END$$
 
 TRIGGER HotelIDs:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders1 
-    BEFORE DELETE ON BookedHotelIDs FOR EACH ROW BEGIN INSERT INTO CancelledHotelIDs values(OLD.bh_id, OLD.hotel_id);
-   
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders1 
+        BEFORE DELETE ON BookedHotelIDs FOR EACH ROW BEGIN INSERT INTO CancelledHotelIDs values(OLD.bh_id, OLD.hotel_id);
+       
+    END$$
 
 TRIGGER Flight:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders2 
-    BEFORE DELETE ON BookedFlights
-    FOR EACH ROW BEGIN
-    INSERT INTO CancelledFlights values(OLD.bf_id, OLD.source, OLD.destination, OLD.arrival_time, OLD.departure_time, OLD.price);
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders2 
+        BEFORE DELETE ON BookedFlights
+        FOR EACH ROW BEGIN
+        INSERT INTO CancelledFlights values(OLD.bf_id, OLD.source, OLD.destination, OLD.arrival_time, OLD.departure_time, OLD.price);
+    END$$
 
 TRIGGER FlightIDs:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders3 
-    BEFORE DELETE ON BookedFlightIDs FOR EACH ROW BEGIN INSERT INTO CancelledFlightIDs values(OLD.bf_id, OLD.flight_id);
-   
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders3 
+        BEFORE DELETE ON BookedFlightIDs FOR EACH ROW BEGIN INSERT INTO CancelledFlightIDs values(OLD.bf_id, OLD.flight_id);
+       
+    END$$
 
 
 TRIGGER Cab:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders4 
-    BEFORE DELETE ON BookedCabs
-    FOR EACH ROW BEGIN
-    INSERT INTO CancelledCabs values(OLD.bc_id, OLD.name,OLD.type,OLD.source,OLD.destination,OLD.date,OLD.price);
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders4 
+        BEFORE DELETE ON BookedCabs
+        FOR EACH ROW BEGIN
+        INSERT INTO CancelledCabs values(OLD.bc_id, OLD.name,OLD.type,OLD.source,OLD.destination,OLD.date,OLD.price);
+    END$$
 
 
 TRIGGER CabIDs:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders5 
-    BEFORE DELETE ON BookedCabIDs FOR EACH ROW BEGIN INSERT INTO CancelledCabIDs values(OLD.bc_id, OLD.cab_id);
-   
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders5 
+        BEFORE DELETE ON BookedCabIDs FOR EACH ROW BEGIN INSERT INTO CancelledCabIDs values(OLD.bc_id, OLD.cab_id);
+       
+    END$$
 
 
 TRIGGER BUS:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders6 
-    BEFORE DELETE ON BookedBuses
-    FOR EACH ROW BEGIN
-    INSERT INTO CancelledBuses values(OLD.bb_id,OLD.source,OLD.destination,OLD.arrival_time,OLD.departure_time,OLD.price);
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders6 
+        BEFORE DELETE ON BookedBuses
+        FOR EACH ROW BEGIN
+        INSERT INTO CancelledBuses values(OLD.bb_id,OLD.source,OLD.destination,OLD.arrival_time,OLD.departure_time,OLD.price);
+    END$$
 
 
 
 TRIGGER BusIDs:
 
-DELIMITER $$
-CREATE TRIGGER cancelled_orders7 
-    BEFORE DELETE ON BookedBusIDs FOR EACH ROW BEGIN INSERT INTO CancelledBusesIDs values(OLD.bb_id, OLD.bus_id);
-   
-END$$
+    DELIMITER $$
+    CREATE TRIGGER cancelled_orders7 
+        BEFORE DELETE ON BookedBusIDs FOR EACH ROW BEGIN INSERT INTO CancelledBusesIDs values(OLD.bb_id, OLD.bus_id);
+       
+    END$$
+
+
+
+CURSORS:
+=========================================================================================================================
+
+
+CURSOR bus_select:
+
+    delimiter $$
+    create procedure bus_select()
+    begin
+    DECLARE done INT DEFAULT 0;
+    DECLARE price int;
+    DECLARE arr_time varchar(20);
+    DECLARE dept_time varchar(20);
+    DECLARE NameCursor CURSOR   FOR SELECT bus_arr_time, bus_dept_time, bus_price FROM BusData;
+
+    OPEN NameCursor;
+    read_loop: LOOP
+        FETCH NameCursor INTO arr_time, dept_time, price;
+        IF done=25 THEN
+            LEAVE read_loop;
+        END IF;
+            SET done = done + 1;
+            select arr_time, dept_time, price;
+        END LOOP;
+    CLOSE NameCursor;
+    END$$
+
+
+
+CURSOR cab_select:
+
+    delimiter $$
+    create procedure cab_select()
+    begin
+    DECLARE done INT DEFAULT 0;
+    DECLARE price int;
+    DECLARE NameCursor CURSOR FOR SELECT cab_price FROM CabPrices;
+
+    OPEN NameCursor;
+    read_loop: LOOP
+        FETCH NameCursor INTO price;
+        IF done=25 THEN
+            LEAVE read_loop;
+        END IF;
+            SET done = done + 1;
+            select price;
+        END LOOP;
+    CLOSE NameCursor;
+    END$$
+
+
+CURSOR flight_select:
+
+    delimiter $$
+    create procedure flight_select()
+    begin
+    DECLARE done INT DEFAULT 0;
+    DECLARE price int;
+    DECLARE arr_time varchar(20);
+    DECLARE dept_time varchar(20);
+    DECLARE NameCursor CURSOR FOR SELECT flight_arr_time, flight_dept_time, flight_price FROM FlightData;
+
+    OPEN NameCursor;
+    read_loop: LOOP
+        FETCH NameCursor INTO arr_time, dept_time, price;
+        IF done=25 THEN
+            LEAVE read_loop;
+        END IF;
+            SET done = done + 1;
+            select arr_time, dept_time, price;
+        END LOOP;
+    CLOSE NameCursor;
+    END$$
+
+
+
+CURSOR hotel_select:
+
+    delimiter $$
+    create procedure hotel_select()
+    begin
+    DECLARE done INT DEFAULT 0;
+    DECLARE name varchar(80);
+    DECLARE NameCursor CURSOR FOR SELECT hotel_name FROM HotelData;
+
+    OPEN NameCursor;
+    read_loop: LOOP
+        FETCH NameCursor INTO name;
+        IF done=25 THEN
+            LEAVE read_loop;
+        END IF;
+            SET done = done + 1;
+            select name;
+        END LOOP;
+    CLOSE NameCursor;
+    END$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ADD FOREIGN KEY IN TABLE-:
+mysql> CREATE TABLE Booking (cs_id integer, ho_id integer, h_id integer, t_id integer, r_id integer, v_id varchar(10), c_id integer,FOREIGN KEY (cs_id) REFERENCES Cab_Service(cs_id), FOREIGN KEY (ho_id) REFERENCES Hotel(ho_id), FOREIGN KEY (h_id) REFERENCES Hospital(h_id), FOREIGN KEY (t_id) REFERENCES Tourist_Spot(t_id), FOREIGN KEY (r_id) REFERENCES Economy(r_id), FOREIGN KEY (c_id) REFERENCES Customer(c_id)  );
+
+Query OK, 0 rows affected (0.45 sec)
+
+
+
+MAKING A DEFAULT VALUE FOR A COLUMN-:
+mysql> ALTER TABLE Cab_Service ADD Total_Cabs integer DEFAULT 50;
+Query OK, 2 rows affected (0.42 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+DROPPING A COLUMN-:
+mysql> ALTER TABLE Cab_Service DROP Total_Cabs;
+Query OK, 2 rows affected (0.28 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+ADDING CHECK CONSTRAINT-:
+mysql> ALTER TABLE hotel add constraint total_rooms check total_rooms>80;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+

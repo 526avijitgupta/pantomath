@@ -1,0 +1,161 @@
+Database changed
+mysql> explain BusCities;
++-----------------+-------------+------+-----+---------+----------------+
+| Field           | Type        | Null | Key | Default | Extra          |
++-----------------+-------------+------+-----+---------+----------------+
+| route_id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| bus_source      | varchar(30) | YES  |     | NULL    |                |
+| bus_destination | varchar(30) | YES  |     | NULL    |                |
++-----------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> explain BusData;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| bus_id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| bus_arr_time  | varchar(30) | YES  |     | NULL    |                |
+| bus_dept_time | varchar(30) | YES  |     | NULL    |                |
+| bus_price     | int(11)     | YES  |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> explain BusRoutes;
++----------+---------+------+-----+---------+----------------+
+| Field    | Type    | Null | Key | Default | Extra          |
++----------+---------+------+-----+---------+----------------+
+| bus_id   | int(11) | NO   | PRI | NULL    | auto_increment |
+| route_id | int(11) | NO   | PRI | 0       |                |
++----------+---------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain BusTypes;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| bus_id   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| bus_type | varchar(100) | NO   | PRI |         |                |
++----------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain CabCities;
++-----------------+-------------+------+-----+---------+----------------+
+| Field           | Type        | Null | Key | Default | Extra          |
++-----------------+-------------+------+-----+---------+----------------+
+| route_id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| cab_source      | varchar(30) | YES  |     | NULL    |                |
+| cab_destination | varchar(30) | YES  |     | NULL    |                |
++-----------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> explain CabNames;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| cab_id   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| cab_name | varchar(100) | NO   | PRI |         |                |
++----------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain CabPrices;
++-----------+---------+------+-----+---------+----------------+
+| Field     | Type    | Null | Key | Default | Extra          |
++-----------+---------+------+-----+---------+----------------+
+| cab_id    | int(11) | NO   | PRI | NULL    | auto_increment |
+| cab_price | int(11) | YES  |     | NULL    |                |
++-----------+---------+------+-----+---------+----------------+
+2 rows in set (0.01 sec)
+
+mysql> explain CabRoutes;
++----------+---------+------+-----+---------+----------------+
+| Field    | Type    | Null | Key | Default | Extra          |
++----------+---------+------+-----+---------+----------------+
+| cab_id   | int(11) | NO   | PRI | NULL    | auto_increment |
+| route_id | int(11) | NO   | PRI | 0       |                |
++----------+---------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain CabTypes;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| cab_id   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| cab_type | varchar(100) | NO   | PRI |         |                |
++----------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain FlightCities;
++--------------------+-------------+------+-----+---------+----------------+
+| Field              | Type        | Null | Key | Default | Extra          |
++--------------------+-------------+------+-----+---------+----------------+
+| route_id           | int(11)     | NO   | PRI | NULL    | auto_increment |
+| flight_source      | varchar(30) | YES  |     | NULL    |                |
+| flight_destination | varchar(30) | YES  |     | NULL    |                |
++--------------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> explain FlightData;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| flight_id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| flight_arr_time  | varchar(30) | YES  |     | NULL    |                |
+| flight_dept_time | varchar(30) | YES  |     | NULL    |                |
+| flight_price     | int(11)     | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> explain FlightNames;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| flight_id   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| flight_name | varchar(30) | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain FlightRoutes;
++-----------+---------+------+-----+---------+----------------+
+| Field     | Type    | Null | Key | Default | Extra          |
++-----------+---------+------+-----+---------+----------------+
+| flight_id | int(11) | NO   | PRI | NULL    | auto_increment |
+| route_id  | int(11) | NO   | PRI | 0       |                |
++-----------+---------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain HotelCities;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| location_id | int(11)     | NO   | PRI | NULL    | auto_increment |
+| location    | varchar(30) | NO   | PRI |         |                |
++-------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain HotelData;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| hotel_id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| hotel_name  | varchar(50) | YES  |     | NULL    |                |
+| location_id | int(11)     | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> explain HotelPrices;
++-------------+---------+------+-----+---------+----------------+
+| Field       | Type    | Null | Key | Default | Extra          |
++-------------+---------+------+-----+---------+----------------+
+| hotel_id    | int(11) | NO   | PRI | NULL    | auto_increment |
+| hotel_price | double  | YES  |     | NULL    |                |
++-------------+---------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> explain HotelRatings;
++--------------+---------+------+-----+---------+----------------+
+| Field        | Type    | Null | Key | Default | Extra          |
++--------------+---------+------+-----+---------+----------------+
+| hotel_id     | int(11) | NO   | PRI | NULL    | auto_increment |
+| hotel_rating | float   | YES  |     | NULL    |                |
++--------------+---------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
