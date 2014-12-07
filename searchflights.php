@@ -81,8 +81,9 @@
 							echo "The query returned nothing!";
 						} else {
 							if(mysqli_num_rows($result)>0) {  //if a table is returned, display the table 
-				      	print "<table border=1>";
+				      	print "<table border='solid'>";
 				        print "<form action='flight_booking.php' method='post'>";
+				        print "<tr><td>Flight Name</td><td></td><td>Arrival Time</td><td></td><td>Departure time</td><td></td><td>Price</td><td></td></tr>";
 				          for($i=0;$i<mysqli_num_rows($result);$i++){
 
 				            $row = mysqli_fetch_array($result, MYSQL_NUM);
@@ -93,7 +94,7 @@
 					          print "<input type='checkbox' name='ch[]' value='{$i}'></input>";
 					          print "</tr>";
 				          }
-					      print "<input type='submit' value='book'></td>";
+					      print "<input type='submit' value='book' class='btn btn-success' style='position:absolute; top:250px; left:400px;'></td>";
 				        print "</form>";
 				        print "</table>"; 
 				      }

@@ -73,7 +73,7 @@
 					echo $date;
 					for($i=0;$i<sizeof($checked);$i++) {
 
-						echo "The loop is running $i times";
+						// echo "The loop is running $i times";
 						$row = $_SESSION['result'][$checked[$i]];
 						$query = "call bbooking('$source', '$destination', '$row[1]', '$row[2]','$row[3]');";
 						$result = mysqli_query($con, $query);

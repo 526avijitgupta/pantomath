@@ -81,7 +81,7 @@
 						// echo "Checked array returned";
 					}
 					for($i=0;$i<sizeof($checked);$i++) {
-						echo "The loop is running $i times";
+						// echo "The loop is running $i times";
 						$row = $_SESSION['result'][$checked[$i]];
 						// if($result) {
 

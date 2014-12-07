@@ -56,6 +56,8 @@ span[class^="ion-social"] { font-size:22px; }
 
 #class-select { width: 203px; }
 
+/*.pos-btn { position: absolute !important; margin: 0 auto; top:200px !important; }*/
+
 
 /********************** JQUERY MIN CSS **************************/
 
